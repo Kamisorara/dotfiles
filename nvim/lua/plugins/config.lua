@@ -505,7 +505,7 @@ config["nvim-tree"] = {
             }
 
             api.config.mappings.default_on_attach(bufnr)
-
+            -- operates
             require("core.utils").group_map({
                 edit = { "n", "<CR>", api.node.open.edit },
                 vertical_split = { "n", "v", api.node.open.vertical },
