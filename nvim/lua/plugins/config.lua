@@ -346,6 +346,7 @@ config["markdown-preview"] = {
 
 config.neogit = {
     "NeogitOrg/neogit",
+    version = "v0.0.1",
     dependencies = "nvim-lua/plenary.nvim",
     main = "neogit",
     opts = {
@@ -1366,6 +1367,23 @@ config.lspsaga = {
 --         })
 --     end,
 -- }
+
+-- cursor_line配置
+config["nvim-cursorline"] = {
+    "yamatsum/nvim-cursorline",
+    opts = {
+        cursorline = {
+            enable = true,
+            timeout = 1000,
+            number = false,
+        },
+        cursorword = {
+            enable = true,
+            min_length = 3,
+            hl = { underline = true },
+        },
+    },
+}
 
 Kamisora.plugins = config
 Kamisora.keymap.prefix = {
