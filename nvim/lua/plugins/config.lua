@@ -11,13 +11,11 @@ local priority = {
 
 config.bufferline = {
     "akinsho/bufferline.nvim",
-    version = "v4.4.1",
-    lazy = false,
+    version = "v4.6.1",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
-    -- Set high priority to ensure this is loaded before nvim-transparent
-    priority = priority.HIGH,
+    lazy = false,
     opts = {
         options = {
             close_command = ":BufferLineClose %d",
@@ -43,9 +41,9 @@ config.bufferline = {
         },
     },
     config = function(_, opts)
-        vim.api.nvim_create_user_command("BufferLineClose", function(opts)
-            local bufnr = 1 * opts.args
-            local buf_is_modified = vim.api.nvim_buf_get_option(bufnr, "modified")
+        vim.api.nvim_create_user_command("BufferLineClose", function(buffer_line_opts)
+            local bufnr = 1 * buffer_line_opts.args
+            local buf_is_modified = vim.api.nvim_get_option_value("modified", { buf = bufnr })
 
             local bdelete_arg
             if bufnr == 0 then
@@ -67,13 +65,19 @@ config.bufferline = {
         require("bufferline").setup(opts)
     end,
     keys = {
-        { "<leader>bc", ":BufferLinePickClose<CR>", desc = "pick close", silent = true, noremap = true },
+        { "<leader>bc", "<Cmd>BufferLinePickClose<CR>", desc = "pick close", silent = true, noremap = true },
         -- <esc> is added in case current buffer is the last
-        { "<leader>bd", ":BufferLineClose 0<CR><ESC>", desc = "close current buffer", silent = true, noremap = true },
-        { "<leader>bh", ":BufferLineCyclePrev<CR>", desc = "prev buffer", silent = true, noremap = true },
-        { "<leader>bl", ":BufferLineCycleNext<CR>", desc = "next buffer", silent = true, noremap = true },
-        { "<leader>bo", ":BufferLineCloseOthers<CR>", desc = "close others", silent = true, noremap = true },
-        { "<leader>bp", ":BufferLinePick<CR>", desc = "pick buffer", silent = true, noremap = true },
+        {
+            "<leader>bd",
+            "<Cmd>BufferLineClose 0<CR><ESC>",
+            desc = "close current buffer",
+            silent = true,
+            noremap = true,
+        },
+        { "<leader>bh", "<Cmd>BufferLineCyclePrev<CR>", desc = "prev buffer", silent = true, noremap = true },
+        { "<leader>bl", "<Cmd>BufferLineCycleNext<CR>", desc = "next buffer", silent = true, noremap = true },
+        { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "close others", silent = true, noremap = true },
+        { "<leader>bp", "<Cmd>BufferLinePick<CR>", desc = "pick buffer", silent = true, noremap = true },
     },
 }
 
