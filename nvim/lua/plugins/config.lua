@@ -1390,7 +1390,7 @@ config["nvim-cursorline"] = {
 }
 
 --notice (显示commandline)
-config["notice"] = {
+config["noice"] = {
     "folke/noice.nvim",
     event = "VeryLazy",
     opts = {
