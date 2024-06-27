@@ -1,4 +1,6 @@
 ```
+based on IceNvim
+
 ❯ cd dotfiles
 
 ❯ ln -s ~/dotfiles/nvim/ ~/.config/nvim
