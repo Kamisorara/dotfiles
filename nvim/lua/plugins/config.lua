@@ -1280,6 +1280,11 @@ config["typescript-tools"] = {
                     -- 自动导入包的时候使用绝对路径
                     importModuleSpecifierPreference = "non-relative",
                 },
+                -- 标签闭合
+                jsx_close_tag = {
+                    enable = true,
+                    filetypes = { "javascriptreact", "typescriptreact" },
+                },
             },
         }
     end,
