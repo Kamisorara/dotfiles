@@ -781,7 +781,7 @@ config["symbols-outline"] = {
         },
     },
 }
-
+-- 查找文件
 config.telescope = {
     "nvim-telescope/telescope.nvim",
     dependencies = {
@@ -806,6 +806,8 @@ config.telescope = {
                     ["<C-d>"] = "preview_scrolling_down",
                 },
             },
+            -- 排除node_modules里的文件
+            file_ignore_patterns = { "node_modules" },
         },
         pickers = {
             find_files = {
