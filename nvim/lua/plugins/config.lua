@@ -1330,10 +1330,9 @@ config.lspsaga = {
                 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
                 vim.keymap.set({ "n", "v" }, "<leader>lc", "<cmd>Lspsaga code_action<cr>", opts)
                 vim.keymap.set("n", "gr", builtin.lsp_references, opts)
+                vim.keymap.set("n", "<space>lk", "<cmd>Lspsaga hover_doc<cr>", { silent = true })
             end,
         })
-
-        vim.keymap.set("n", "<space>k", "<cmd>Lspsaga hover_doc<cr>", { silent = true })
 
         -- error lens
         vim.fn.sign_define {
