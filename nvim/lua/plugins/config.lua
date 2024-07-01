@@ -81,22 +81,38 @@ config.bufferline = {
     },
 }
 
+-- config.colorizer = {
+--     "NvChad/nvim-colorizer.lua",
+--     main = "colorizer",
+--     event = "BufEnter",
+--     opts = {
+--         filetypes = {
+--             "*",
+--             css = {
+--                 names = true,
+--             },
+--         },
+--         user_default_options = {
+--             css = true,
+--             css_fn = true,
+--             names = false,
+--             always_update = true,
+--         },
+--     },
+-- }
+
+-- 颜色
 config.colorizer = {
-    "NvChad/nvim-colorizer.lua",
-    main = "colorizer",
-    event = "BufEnter",
-    opts = {
-        filetypes = {
-            "*",
-            css = {
-                names = true,
-            },
-        },
-        user_default_options = {
-            css = true,
-            css_fn = true,
-            names = false,
-            always_update = true,
+    { "NvChad/nvim-colorizer.lua", enabled = false },
+    {
+        "brenoprata10/nvim-highlight-colors",
+        event = "VeryLazy",
+        cmd = "HighlightColors",
+        opts = {
+            enabled_named_colors = false,
+            render = "virtual",
+            virtual_symbol_position = "inline",
+            enable_tailwind = true,
         },
     },
 }
@@ -1139,10 +1155,21 @@ config["nvim-cmp"] = {
                 completeopt = "menu,menuone,preview,noselect",
             },
             formatting = {
-                format = lspkind.cmp_format {
-                    maxwidth = 50,
-                    ellipsis_char = "...",
-                },
+                -- format = lspkind.cmp_format {
+                --     maxwidth = 50,
+                --     ellipsis_char = "...",
+                -- },
+                format = function(entry, item)
+                    local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+                    item = lspkind.cmp_format {
+                        -- any lspkind format settings here
+                    }(entry, item)
+                    if color_item.abbr_hl_group then
+                        item.kind_hl_group = color_item.abbr_hl_group
+                        item.kind = color_item.abbr
+                    end
+                    return item
+                end,
             },
             snippet = { -- configure how nvim-cmp interacts with snippet engine
                 expand = function(args)
