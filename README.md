@@ -1,3 +1,4 @@
+require NeoVim's version >= 0.10
 ```
 based on IceNvim
 
