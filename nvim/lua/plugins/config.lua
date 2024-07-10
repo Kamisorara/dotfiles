@@ -273,7 +273,8 @@ config.hop = {
         keys = "fjghdksltyrueiwoqpvbcnxmza",
     },
     keys = {
-        { "<leader>hp", ":HopWord<CR>", desc = "hop word", silent = true, noremap = true },
+        { "<leader><leader>w", ":HopWord<CR>", desc = "hop word1", silent = true, noremap = true },
+        { "<leader><leader>b", ":HopWord<CR>", desc = "hop word2", silent = true, noremap = true },
     },
 }
 
