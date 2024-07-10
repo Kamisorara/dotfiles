@@ -1473,7 +1473,7 @@ Kamisora.keymap.prefix = {
     ["<leader>b"] = { name = "+buffer" },
     ["<leader>c"] = { name = "+comment" },
     ["<leader>g"] = { name = "+git" },
-    ["<leader>h"] = { name = "+hop" },
+    ["<leader><leader>"] = { name = "+hop" },
     ["<leader>l"] = { name = "+lsp" },
     ["<leader>t"] = { name = "+telescope" },
     ["<leader>u"] = { name = "+utils" },
