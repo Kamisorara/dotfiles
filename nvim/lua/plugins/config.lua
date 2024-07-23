@@ -963,6 +963,11 @@ config["everforest"] = {
     end,
 }
 
+config["onedarkpro"] = {
+    "olimorris/onedarkpro.nvim",
+    priority = priority.HIGH, -- Ensure it loads first
+}
+
 -- Lsp
 config.mason = {
     "williamboman/mason.nvim",

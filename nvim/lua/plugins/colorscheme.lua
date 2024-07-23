@@ -97,6 +97,10 @@ Kamisora.colorschemes = {
         name = "everforest",
         background = "dark",
     },
+    ["onedarkpro"] = {
+        name = "onedark",
+        background = "dark",
+    },
     tokyonight = {
         name = "tokyonight",
         setup = {
