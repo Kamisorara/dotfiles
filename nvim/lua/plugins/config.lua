@@ -892,6 +892,7 @@ config.undotree = {
 
 config["which-key"] = {
     "folke/which-key.nvim",
+    version = "v2.1.0",
     event = "VeryLazy",
     opts = {
         plugins = {
