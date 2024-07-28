@@ -273,8 +273,7 @@ config.hop = {
         keys = "fjghdksltyrueiwoqpvbcnxmza",
     },
     keys = {
-        { "<leader><leader>w", ":HopWord<CR>", desc = "hop word1", silent = true, noremap = true },
-        { "<leader><leader>b", ":HopWord<CR>", desc = "hop word2", silent = true, noremap = true },
+        { "<leader>hp", ":HopWord<CR>", desc = "hop word", silent = true, noremap = true },
     },
 }
 
@@ -1479,7 +1478,7 @@ Kamisora.keymap.prefix = {
     ["<leader>b"] = { name = "+buffer" },
     ["<leader>c"] = { name = "+comment" },
     ["<leader>g"] = { name = "+git" },
-    ["<leader><leader>"] = { name = "+hop" },
+    ["<leader>h"] = { name = "+hop" },
     ["<leader>l"] = { name = "+lsp" },
     ["<leader>t"] = { name = "+telescope" },
     ["<leader>u"] = { name = "+utils" },
