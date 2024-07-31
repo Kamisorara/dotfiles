@@ -963,7 +963,7 @@ config["everforest"] = {
 }
 
 config["onedarkpro"] = {
-    "olimorris/onedarkpro.nvim",
+    "navarasu/onedark.nvim",
     priority = priority.HIGH, -- Ensure it loads first
 }
 
