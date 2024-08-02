@@ -277,25 +277,26 @@ config.hop = {
     },
 }
 
-config["indent-blankline"] = {
-    "lukas-reineke/indent-blankline.nvim",
-    event = "BufEnter",
-    main = "ibl",
-    opts = {
-        exclude = {
-            filetypes = {
-                "dashboard",
-                "terminal",
-                "help",
-                "log",
-                "markdown",
-                "TelescopePrompt",
-                "lsp-installer",
-                "lspinfo",
-            },
-        },
-    },
-}
+-- 竖向划线
+-- config["indent-blankline"] = {
+--     "lukas-reineke/indent-blankline.nvim",
+--     event = "BufEnter",
+--     main = "ibl",
+--     opts = {
+--         exclude = {
+--             filetypes = {
+--                 "dashboard",
+--                 "terminal",
+--                 "help",
+--                 "log",
+--                 "markdown",
+--                 "TelescopePrompt",
+--                 "lsp-installer",
+--                 "lspinfo",
+--             },
+--         },
+--     },
+-- }
 
 config.lualine = {
     "nvim-lualine/lualine.nvim",
@@ -963,7 +964,7 @@ config["everforest"] = {
 }
 
 config["onedarkpro"] = {
-    "navarasu/onedark.nvim",
+    "olimorris/onedarkpro.nvim",
     priority = priority.HIGH, -- Ensure it loads first
 }
 
@@ -1422,7 +1423,7 @@ config.lspsaga = {
 --     end,
 -- }
 
--- cursor_line配置
+-- cursor_line(单词下划线)配置
 config["nvim-cursorline"] = {
     "yamatsum/nvim-cursorline",
     opts = {
