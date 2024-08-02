@@ -70,5 +70,6 @@ Kamisora.keymap.general = {
     save_file = { { "n", "i", "v" }, "<C-s>", "<Esc>:w<CR>" },
     shift_line_left = { "v", "<", "<gv" },
     shift_line_right = { "v", ">", ">gv" },
+    select_all = { "n", "<C-a>", "gg<S-v>G" },
     undo = { { "n", "i", "v", "t", "c" }, "<C-z>", undo },
 }
