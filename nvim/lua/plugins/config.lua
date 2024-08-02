@@ -6,7 +6,7 @@ local config_root = string.gsub(vim.fn.stdpath "config", "\\", "/")
 local priority = {
     LOW = 100,
     MEDIUM = 200,
-    HIGH = 615,
+    HIGH = 1000,
 }
 
 config.bufferline = {
@@ -278,25 +278,25 @@ config.hop = {
 }
 
 -- 竖向划线
--- config["indent-blankline"] = {
---     "lukas-reineke/indent-blankline.nvim",
---     event = "BufEnter",
---     main = "ibl",
---     opts = {
---         exclude = {
---             filetypes = {
---                 "dashboard",
---                 "terminal",
---                 "help",
---                 "log",
---                 "markdown",
---                 "TelescopePrompt",
---                 "lsp-installer",
---                 "lspinfo",
---             },
---         },
---     },
--- }
+config["indent-blankline"] = {
+    "lukas-reineke/indent-blankline.nvim",
+    event = "BufEnter",
+    main = "ibl",
+    opts = {
+        exclude = {
+            filetypes = {
+                "dashboard",
+                "terminal",
+                "help",
+                "log",
+                "markdown",
+                "TelescopePrompt",
+                "lsp-installer",
+                "lspinfo",
+            },
+        },
+    },
+}
 
 config.lualine = {
     "nvim-lualine/lualine.nvim",
@@ -419,6 +419,7 @@ config.neorg = {
     end,
 }
 
+-- 平滑移动
 config.neoscroll = {
     "karb94/neoscroll.nvim",
     event = "BufEnter",
