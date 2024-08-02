@@ -112,4 +112,10 @@ Kamisora.colorschemes = {
         },
         background = "dark",
     },
+    ["solarized-osaka"] = {
+        name = "solarized-osaka",
+        setup = {
+            transparent = true,
+        },
+    },
 }

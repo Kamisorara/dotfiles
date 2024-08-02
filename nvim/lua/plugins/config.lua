@@ -967,6 +967,12 @@ config["onedarkpro"] = {
     priority = priority.HIGH, -- Ensure it loads first
 }
 
+config["solarized-osaka"] = {
+    "craftzdog/solarized-osaka.nvim",
+    lazy = true,
+    priority = priority.HIGH,
+}
+
 -- Lsp
 config.mason = {
     "williamboman/mason.nvim",
