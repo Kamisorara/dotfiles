@@ -4,15 +4,14 @@ local opt = vim.opt
 g.encoding = "UTF-8"
 opt.fileencoding = "utf-8"
 
-local win_height = vim.fn.winheight(0)
+-- local win_height = vim.fn.winheight(0)
 -- opt.scrolloff = math.floor((win_height - 1) / 2)
 -- opt.sidescrolloff = math.floor((win_height - 1) / 2)
 opt.scrolloff = 7
 opt.sidescrolloff = 8
 -- 与系统剪切板同步
 opt.clipboard = "unnamedplus"
-opt.smartindent = true -- 智能缩进
-
+opt.smartindent = true
 opt.number = true
 opt.relativenumber = true
 
@@ -30,7 +29,6 @@ opt.expandtab = true
 opt.shiftwidth = 2
 
 opt.autoindent = true
-opt.smartindent = true
 
 -- Case insensitive searching when no upper case character is present
 opt.ignorecase = true
@@ -41,9 +39,6 @@ opt.hlsearch = false
 
 -- Search when typing
 opt.incsearch = true
-
-opt.cmdheight = 2
-
 -- Auto load the file when modified externally
 opt.autoread = true
 
