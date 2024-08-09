@@ -830,7 +830,7 @@ config.telescope = {
                 },
             },
             -- 排除node_modules里的文件
-            file_ignore_patterns = { "node_modules" },
+            file_ignore_patterns = { "node_modules", "android", "ios" },
         },
         pickers = {
             find_files = {
