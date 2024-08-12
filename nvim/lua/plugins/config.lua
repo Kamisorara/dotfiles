@@ -496,8 +496,8 @@ config["nvim-transparent"] = {
     "xiyaowong/nvim-transparent",
     opts = {
         exclude_groups = {
-            "LineNr",
-            "CursorLine",
+            -- "LineNr",
+            -- "CursorLine",
         }, -- table: groups you don't want to clear
         extra_groups = {
             "NvimTreeNormal",
