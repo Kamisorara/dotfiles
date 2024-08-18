@@ -34,6 +34,7 @@ lsp.ensure_installed = {
     "stylua",
     "isort",
     "black",
+    "solidity",
 }
 
 lsp.servers = {
@@ -46,6 +47,7 @@ lsp.servers = {
     "omnisharp",
     "pyright",
     "tsserver",
+    "solidity",
 }
 
 local config = {}
