@@ -35,6 +35,7 @@ lsp.ensure_installed = {
     "isort",
     "black",
     "solidity",
+    "solidity_ls",
 }
 
 lsp.servers = {
@@ -48,6 +49,7 @@ lsp.servers = {
     "pyright",
     "tsserver",
     "solidity",
+    "solidity_ls",
 }
 
 local config = {}
@@ -86,6 +88,14 @@ config.cssls = function()
             },
         },
     })
+end
+
+-- solidity configuration
+config.solidity_ls = function()
+    return {
+        cmd = { "nomicfoundation-solidity-language-server", "--stdio" },
+        filetypes = { "solidity" },
+    }
 end
 
 config.emmet_ls = function()

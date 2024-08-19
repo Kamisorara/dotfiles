@@ -688,6 +688,10 @@ config["nvim-treesitter"] = {
                 "prisma",
                 "markdown",
                 "markdown_inline",
+                "solidity",
+                "toml",
+                "vue",
+                "gitignore",
             },
 
             sync_install = false,
