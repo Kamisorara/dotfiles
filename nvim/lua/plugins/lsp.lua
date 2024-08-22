@@ -34,8 +34,8 @@ lsp.ensure_installed = {
     "stylua",
     "isort",
     "black",
-    "solidity",
     "solidity_ls",
+    "tailwindcss-language-server",
 }
 
 lsp.servers = {
@@ -48,7 +48,6 @@ lsp.servers = {
     "omnisharp",
     "pyright",
     "tsserver",
-    "solidity",
     "solidity_ls",
 }
 

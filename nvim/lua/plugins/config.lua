@@ -857,7 +857,7 @@ config.telescope = {
         pcall(telescope.load_extension, "env")
     end,
     keys = {
-        { "<leader>f", ":Telescope find_files<CR>", desc = "find file", silent = true, noremap = true },
+        { "<C-e>", ":Telescope find_files<CR>", desc = "find file", silent = true, noremap = true },
         { "<leader>t<C-f>", ":Telescope live_grep<CR>", desc = "live grep", silent = true, noremap = true },
         { "<leader>te", ":Telescope env<CR>", desc = "n", silent = true, noremap = true },
     },
@@ -1340,6 +1340,26 @@ config["typescript-tools"] = {
             },
         }
     end,
+}
+
+-- tailwind-tools.lua
+config["tailwind-tools"] = {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+        "nvim-treesitter/nvim-treesitter",
+        "nvim-telescope/telescope.nvim", -- optional
+        "neovim/nvim-lspconfig", -- optional
+    },
+    opts = {
+        document_color = {
+            enabled = false, -- can be toggled by commands
+            kind = "inline", -- "inline" | "foreground" | "background"
+            inline_symbol = "󰝤 ", -- only used in inline mode
+            debounce = 200, -- in milliseconds, only applied in insert mode
+        },
+    }, -- your configuration
 }
 
 -- lspsaga configuration
