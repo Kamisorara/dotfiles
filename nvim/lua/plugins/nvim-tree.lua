@@ -26,18 +26,6 @@ return {
         -- custom mappings
         vim.keymap.set('n', '<leader>e', api.tree.toggle, opts 'Toggle')
         vim.keymap.set('n', '?', api.tree.toggle_help, opts 'Help')
-        vim.keymap.set('n', '<CR>', api.node.open.edit)
-        vim.keymap.set('n', 'v', api.node.open.vertical)
-        vim.keymap.set('n', 'h', api.node.open.horizontal)
-        vim.keymap.set('n', '.', api.tree.toggle_hidden_filter)
-        vim.keymap.set('n', '<F5>', api.tree.reload)
-        vim.keymap.set('n', 'a', api.fs.create)
-        vim.keymap.set('n', 'd', api.fs.remove)
-        vim.keymap.set('n', 'r', api.fs.rename)
-        vim.keymap.set('n', 'x', api.fs.cut)
-        vim.keymap.set('n', 'y', api.fs.copy.node)
-        vim.keymap.set('n', 'p', api.fs.paste)
-        vim.keymap.set('n', 's', api.node.run.system)
       end
 
       require('nvim-tree').setup {
