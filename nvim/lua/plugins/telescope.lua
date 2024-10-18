@@ -11,6 +11,17 @@ return {
   },
   opts = {
     defaults = {
+      vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--hidden',
+        '--glob=!.git/',
+      },
       initial_mode = 'insert',
       mappings = {
         i = {
@@ -23,12 +34,19 @@ return {
           ['<C-d>'] = 'preview_scrolling_down',
         },
       },
-      -- 排除node_modules里的文件
-      file_ignore_patterns = { 'node_modules', 'android', 'ios' },
+      file_ignore_patterns = {
+        'node_modules',
+        'android',
+        'ios',
+        '.git',
+        '.idea',
+        '.vs',
+      },
     },
     pickers = {
       find_files = {
         winblend = 20,
+        previewer = false, -- 禁用预览提高速度
       },
     },
     extensions = {
