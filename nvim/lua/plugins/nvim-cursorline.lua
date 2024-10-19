@@ -2,8 +2,8 @@ return {
   'yamatsum/nvim-cursorline',
   opts = {
     cursorline = {
-      enable = true,
-      timeout = 0,
+      enable = false,
+      timeout = 1000,
       number = false,
     },
     cursorword = {
