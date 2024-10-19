@@ -13,7 +13,7 @@ opt.sidescrolloff = 8 -- 在靠近左侧或右侧时保持至少 8 列可见
 opt.clipboard = 'unnamedplus' -- 与系统剪贴板同步
 opt.smartindent = true -- 启用智能缩进
 opt.number = true -- 显示行号
-opt.relativenumber = true -- 显示相对行号
+opt.relativenumber = false -- 显示相对行号
 
 opt.cursorline = true -- 高亮显示当前行
 
@@ -48,7 +48,7 @@ opt.backup = false -- 禁用备份文件
 opt.writebackup = false -- 禁用写入备份文件
 opt.swapfile = false -- 禁用交换文件
 
-opt.updatetime = 300 -- 设置较短的更新间隔时间（单位为毫秒）
+opt.updatetime = 200 -- 设置较短的更新间隔时间（单位为毫秒）
 
 opt.timeoutlen = 500 -- 等待映射序列完成的时间（单位为毫秒）
 
