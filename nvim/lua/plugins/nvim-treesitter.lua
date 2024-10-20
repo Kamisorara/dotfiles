@@ -21,7 +21,6 @@ return {
           'json',
           'graphql',
           'regex',
-          'rust',
           'prisma',
           'markdown',
           'markdown_inline',
