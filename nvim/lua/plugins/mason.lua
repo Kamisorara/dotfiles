@@ -15,37 +15,36 @@ return {
       },
     }
 
-    require('mason-lspconfig').setup {}
+    -- 添加 LSP 服务器列表
+    local lsp_servers = {
+      'clangd',
+      'cssls',
+      'emmet_ls',
+      'html',
+      'jsonls',
+      'lua_ls',
+      'pyright',
+      -- 'tsserver', -- 使用了 pmizio/typescript-tools.nvim 作为 TypeScript 的 LSP 插件
+    }
+
+    require('mason-lspconfig').setup {
+      ensure_installed = lsp_servers, -- 确保 LSP 服务器已安装
+    }
+
     require('mason-tool-installer').setup {
       ensure_installed = {
-        'typescript-language-server',
-        'lua-language-server',
         'stylua',
         'eslint_d',
         'prettierd',
-        'rust-analyzer',
         'graphql-language-service-cli',
         'prisma-language-server',
-        'clangd',
-        'eslint_d',
-        'prettierd',
-        'css-lsp',
-        'emmet-ls',
-        'html-lsp',
-        'json-lsp',
-        'lua-language-server',
-        'omnisharp',
-        'pyright',
-        'typescript-language-server',
         'autopep8',
-        'csharpier',
         'fixjson',
         'prettier',
         'shfmt',
-        'stylua',
         'isort',
         'black',
-      },
+      }, -- 保留非 LSP 工具的安装
     }
   end,
 }
