@@ -76,29 +76,29 @@ return {
       },
       capabilities = cmp_capabilities,
     }
-
-    -- emmet_ls
-    lspconfig.emmet_ls.setup {
-      filetypes = {
-        'html',
-        'css',
-        'scss',
-        'javascript',
-        'typescriptreact',
-        'javascriptreact',
-        'haml',
-        'xml',
-        'xsl',
-        'pug',
-        'slim',
-        'sass',
-        'stylus',
-        'less',
-        'sss',
-        'hbs',
-        'handlebars',
-      },
-      capabilities = cmp_capabilities,
-    }
+    --
+    -- -- emmet_ls
+    -- lspconfig.emmet_ls.setup {
+    --   filetypes = {
+    --     'html',
+    --     'css',
+    --     'scss',
+    --     'javascript',
+    --     'typescriptreact',
+    --     'javascriptreact',
+    --     'haml',
+    --     'xml',
+    --     'xsl',
+    --     'pug',
+    --     'slim',
+    --     'sass',
+    --     'stylus',
+    --     'less',
+    --     'sss',
+    --     'hbs',
+    --     'handlebars',
+    --   },
+    --   capabilities = cmp_capabilities,
+    -- }
   end,
 }
