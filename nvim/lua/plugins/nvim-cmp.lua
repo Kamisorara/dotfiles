@@ -1,6 +1,5 @@
 return {
   'hrsh7th/nvim-cmp',
-  -- version = 'v0.0.1',
   event = 'VeryLazy',
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer

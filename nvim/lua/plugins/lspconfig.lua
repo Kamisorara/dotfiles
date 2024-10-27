@@ -100,5 +100,8 @@ return {
     --   },
     --   capabilities = cmp_capabilities,
     -- }
+
+    -- python
+    lspconfig.pyright.setup {}
   end,
 }
