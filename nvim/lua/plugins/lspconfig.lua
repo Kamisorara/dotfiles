@@ -102,9 +102,13 @@ return {
     -- }
 
     -- python
-    lspconfig.pyright.setup {}
+    lspconfig.pyright.setup {
+      capabilities = cmp_capabilities,
+    }
 
     -- html
-    lspconfig.html.setup {}
+    lspconfig.html.setup {
+      capabilities = cmp_capabilities,
+    }
   end,
 }
