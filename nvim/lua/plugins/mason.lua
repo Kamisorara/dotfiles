@@ -45,6 +45,7 @@ return {
         'shfmt',
         'isort',
         'black',
+        'html-lsp',
       }, -- 保留非 LSP 工具的安装
     }
   end,
