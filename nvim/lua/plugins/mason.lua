@@ -24,6 +24,7 @@ return {
       'jsonls',
       'lua_ls',
       'pyright',
+      'html',
       -- 'tsserver', -- 使用了 pmizio/typescript-tools.nvim 作为 TypeScript 的 LSP 插件
     }
 

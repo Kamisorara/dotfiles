@@ -103,5 +103,8 @@ return {
 
     -- python
     lspconfig.pyright.setup {}
+
+    -- html
+    lspconfig.html.setup {}
   end,
 }
