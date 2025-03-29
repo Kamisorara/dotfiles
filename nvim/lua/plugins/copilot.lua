@@ -11,14 +11,14 @@ return {
     build = 'make tiktoken', -- Only on MacOS or Linux
     keys = {
       {
-        '<leader>ch',
+        '<C-c>',
         '<cmd>CopilotChat<cr>',
         desc = 'Open Copilot Chat',
         silent = true,
         noremap = true,
       },
       {
-        '<leader>ce',
+        '<C-e>',
         '<cmd>CopilotChatExplain<cr>',
         desc = 'Explain Code',
         silent = true,
@@ -32,7 +32,7 @@ return {
         noremap = true,
       },
       {
-        '<leader>cf',
+        '<C-f>',
         '<cmd>CopilotChatFix<cr>',
         desc = 'Fix Code',
         silent = true,
