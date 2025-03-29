@@ -9,46 +9,39 @@ return {
       { 'nvim-lua/plenary.nvim', branch = 'master' }, -- for curl, log and async functions
     },
     build = 'make tiktoken', -- Only on MacOS or Linux
-    keys = {
-      {
-        '<C-c>',
-        '<cmd>CopilotChat<cr>',
-        desc = 'Open Copilot Chat',
-        silent = true,
-        noremap = true,
-      },
-      {
-        '<C-e>',
-        '<cmd>CopilotChatExplain<cr>',
-        desc = 'Explain Code',
-        silent = true,
-        noremap = true,
-      },
-      {
-        '<leader>ct',
-        '<cmd>CopilotChatTests<cr>',
-        desc = 'Generate Tests',
-        silent = true,
-        noremap = true,
-      },
-      {
-        '<C-f>',
-        '<cmd>CopilotChatFix<cr>',
-        desc = 'Fix Code',
-        silent = true,
-        noremap = true,
-      },
-      {
-        '<leader>cd',
-        '<cmd>CopilotChatDocs<cr>',
-        desc = 'Generate Docs',
-        silent = true,
-        noremap = true,
-      },
-    },
     opts = {
-      -- See Configuration section for options
+      debug = true,
+      window = {
+        layout = 'float',
+        border = 'rounded',
+        title = 'Copilot Chat',
+      },
+      model = 'claude-3.7-sonnet',
+      question_header = '  User ',
+      answer_header = '  Copilot ',
+      error_header = '  Error ',
+      auto_insert_mode = true,
+      insert_at_end = true,
+      context = 'buffers',
+      highlight_selection = false,
     },
+    config = function(_, opts)
+      local chat = require 'CopilotChat'
+      -- Initialize CopilotChat with the options
+      chat.setup(opts)
+
+      local wk = require 'which-key'
+      wk.register({
+        ['<leader>j'] = {
+          name = 'Copilot',
+          c = { '<cmd>CopilotChat<cr>', 'Open Copilot Chat' },
+          e = { '<cmd>CopilotChatExplain<cr>', 'Explain Code' },
+          t = { '<cmd>CopilotChatTests<cr>', 'Generate Tests' },
+          f = { '<cmd>CopilotChatFix<cr>', 'Fix Code' },
+          d = { '<cmd>CopilotChatDocs<cr>', 'Generate Docs' },
+        },
+      }, { mode = 'n', silent = true, noremap = true })
+    end,
     -- See Commands section for default commands if you want to lazy load on them
   },
 }
