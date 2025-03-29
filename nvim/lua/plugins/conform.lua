@@ -1,6 +1,6 @@
 return {
   'stevearc/conform.nvim',
-  version = 'v8.1.0',
+  version = 'v9.0.0',
   event = 'VeryLazy',
   config = function()
     require('conform').setup {

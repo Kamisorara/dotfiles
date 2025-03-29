@@ -1,6 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
-  version = '0.1.8',
+  -- version = '0.1.8',
   dependencies = {
     'nvim-lua/plenary.nvim',
     'LinArcX/telescope-env.nvim',

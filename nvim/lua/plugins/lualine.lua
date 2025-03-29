@@ -1,6 +1,6 @@
 return {
   'nvim-lualine/lualine.nvim',
-  version = 'compat-nvim-0.6',
+  -- version = 'compat-nvim-0.6',
   config = function()
     require('lualine').setup {
       sections = {

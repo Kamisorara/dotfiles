@@ -1,6 +1,6 @@
 return {
   'NeogitOrg/neogit',
-  version = 'v0.0.1',
+  -- version = 'v0.0.1',
   dependencies = 'nvim-lua/plenary.nvim',
   main = 'neogit',
   opts = {
