@@ -66,7 +66,7 @@ return {
   end,
   keys = {
     {
-      '<C-e>',
+      '<leader>f',
       ':Telescope find_files<CR>',
       desc = 'find file',
       silent = true,
