@@ -15,6 +15,10 @@ return {
         layout = 'float',
         border = 'rounded',
         title = 'Copilot Chat',
+        width = 0.8, -- 80% of editor width
+        height = 0.8, -- 80% of editor height
+        x = 0.5, -- centered
+        y = 0.5, -- centered
       },
       model = 'claude-3.7-sonnet',
       question_header = '  User ',
