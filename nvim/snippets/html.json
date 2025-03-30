@@ -1,0 +1,67 @@
+{
+  "HTML Basic Structure": {
+    "prefix": "html",
+    "description": "Basic HTML5 document structure",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html lang=\"en\">",
+      "<head>",
+      "\t<meta charset=\"UTF-8\">",
+      "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "\t<title>${1:Document}</title>",
+      "</head>",
+      "<body>",
+      "\t${2}",
+      "</body>",
+      "</html>"
+    ]
+  },
+  "HTML Link": {
+    "prefix": "link",
+    "description": "HTML link element",
+    "body": ["<link rel=\"${1:stylesheet}\" href=\"${2:styles.css}\">"]
+  },
+  "HTML Script": {
+    "prefix": "script",
+    "description": "HTML script element",
+    "body": ["<script src=\"${1:script.js}\"></script>"]
+  },
+  "HTML Div": {
+    "prefix": "div",
+    "description": "HTML div element",
+    "body": ["<div class=\"${1:container}\">", "\t${2}", "</div>"]
+  },
+  "HTML Form": {
+    "prefix": "form",
+    "description": "HTML form with common elements",
+    "body": [
+      "<form action=\"${1:#}\" method=\"${2:post}\">",
+      "\t<div class=\"form-group\">",
+      "\t\t<label for=\"${3:name}\">$3</label>",
+      "\t\t<input type=\"${4:text}\" id=\"$3\" name=\"$3\" placeholder=\"${5:Enter $3}\">",
+      "\t</div>",
+      "\t<button type=\"submit\">${6:Submit}</button>",
+      "</form>"
+    ]
+  },
+  "HTML Table": {
+    "prefix": "table",
+    "description": "HTML table with header and body",
+    "body": [
+      "<table>",
+      "\t<thead>",
+      "\t\t<tr>",
+      "\t\t\t<th>${1:Header 1}</th>",
+      "\t\t\t<th>${2:Header 2}</th>",
+      "\t\t</tr>",
+      "\t</thead>",
+      "\t<tbody>",
+      "\t\t<tr>",
+      "\t\t\t<td>${3:Data 1}</td>",
+      "\t\t\t<td>${4:Data 2}</td>",
+      "\t\t</tr>",
+      "\t</tbody>",
+      "</table>"
+    ]
+  }
+}
