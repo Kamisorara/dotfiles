@@ -71,6 +71,9 @@ opt.showmode = false -- 隐藏模式提示
 
 opt.nrformats = 'bin,hex,alpha' -- 设置数字格式，支持二进制、十六进制和字母表示法
 
+-- Add Python user bin to PATH for tools installed via pip
+vim.env.PATH = vim.env.HOME .. '/Library/Python/3.9/bin:' .. vim.env.PATH
+
 vim.cmd [[
     autocmd TermOpen * setlocal nonumber norelativenumber -- 在终端模式中禁用行号和相对行号
 ]]

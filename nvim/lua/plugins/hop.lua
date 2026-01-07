@@ -1,6 +1,6 @@
 return {
-  'phaazon/hop.nvim',
-  version = 'v2.0.3',
+  'smoka7/hop.nvim',
+  version = 'v2.7.2',
   main = 'hop',
   opts = {
     -- This is actually equal to:

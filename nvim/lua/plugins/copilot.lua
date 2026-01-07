@@ -20,7 +20,7 @@ return {
         x = 0.5, -- centered
         y = 0.5, -- centered
       },
-      model = 'claude-3.7-sonnet',
+      model = 'claude-3.5-sonnet',
       question_header = '  User ',
       answer_header = '  Copilot ',
       error_header = '  Error ',
@@ -35,16 +35,14 @@ return {
       chat.setup(opts)
 
       local wk = require 'which-key'
-      wk.register({
-        ['<leader>j'] = {
-          name = 'Copilot',
-          c = { '<cmd>CopilotChat<cr>', 'Open Copilot Chat' },
-          e = { '<cmd>CopilotChatExplain<cr>', 'Explain Code' },
-          t = { '<cmd>CopilotChatTests<cr>', 'Generate Tests' },
-          f = { '<cmd>CopilotChatFix<cr>', 'Fix Code' },
-          d = { '<cmd>CopilotChatDocs<cr>', 'Generate Docs' },
-        },
-      }, { mode = 'n', silent = true, noremap = true })
+      wk.add({
+        { '<leader>j', group = 'Copilot', remap = false },
+        { '<leader>jc', '<cmd>CopilotChat<cr>', desc = 'Open Copilot Chat', remap = false },
+        { '<leader>je', '<cmd>CopilotChatExplain<cr>', desc = 'Explain Code', remap = false },
+        { '<leader>jt', '<cmd>CopilotChatTests<cr>', desc = 'Generate Tests', remap = false },
+        { '<leader>jf', '<cmd>CopilotChatFix<cr>', desc = 'Fix Code', remap = false },
+        { '<leader>jd', '<cmd>CopilotChatDocs<cr>', desc = 'Generate Docs', remap = false },
+      })
     end,
     -- See Commands section for default commands if you want to lazy load on them
   },

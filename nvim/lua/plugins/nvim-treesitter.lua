@@ -9,7 +9,7 @@ return {
       'axelvc/template-string.nvim',
     },
     config = function()
-      require('nvim-treesitter.configs').setup {
+      require('nvim-treesitter.config').setup {
         ensure_installed = {
           'tsx',
           'lua',
@@ -24,6 +24,7 @@ return {
           'prisma',
           'markdown',
           'markdown_inline',
+          'diff',
         },
 
         sync_install = false,

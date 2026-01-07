@@ -1,7 +1,6 @@
 return {
   'numToStr/Comment.nvim',
   main = 'Comment',
-  version = 'v0.8.0',
   opts = {
     mappings = { basic = true, extra = true, extended = false },
   },
