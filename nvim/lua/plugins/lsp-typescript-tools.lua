@@ -23,6 +23,9 @@ return {
           enable = true,
           filetypes = { 'javascriptreact', 'typescriptreact' },
         },
+        -- Enable React Native file detection
+        complete_function_calls = true,
+        include_completions_with_insert_text = true,
       },
     }
   end,

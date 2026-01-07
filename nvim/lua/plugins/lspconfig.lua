@@ -1,30 +1,17 @@
 return {
   'neovim/nvim-lspconfig',
   config = function()
-    local lspconfig = require 'lspconfig'
-
-    -- for fold
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.foldingRange = {
-      dynamicRegistration = false,
-      lineFoldingOnly = true,
-    }
-
     -- Enhance capabilities with nvim-cmp (completion plugin)
-    local cmp_capabilities =
-      require('cmp_nvim_lsp').default_capabilities(capabilities)
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-    -- graphql
-    lspconfig.graphql.setup {
-      filetypes = {
-        'graphql',
-        'gql',
-      },
-      capabilities = cmp_capabilities,
-    }
+    -- Configure LSP servers using Neovim 0.11+ API
+    vim.lsp.config('graphql', {
+      filetypes = { 'graphql', 'gql' },
+      capabilities = capabilities,
+    })
 
     -- lua
-    lspconfig.lua_ls.setup {
+    vim.lsp.config('lua_ls', {
       settings = {
         Lua = {
           diagnostics = {
@@ -39,16 +26,16 @@ return {
           },
         },
       },
-      capabilities = cmp_capabilities,
-    }
+      capabilities = capabilities,
+    })
 
     -- prisma
-    lspconfig.prismals.setup {
-      capabilities = cmp_capabilities,
-    }
+    vim.lsp.config('prismals', {
+      capabilities = capabilities,
+    })
 
     -- css
-    lspconfig.cssls.setup {
+    vim.lsp.config('cssls', {
       settings = {
         css = {
           validate = true,
@@ -69,46 +56,21 @@ return {
           },
         },
       },
-      filetypes = {
-        'css',
-        'scss',
-        'less',
-      },
-      capabilities = cmp_capabilities,
-    }
-    --
-    -- -- emmet_ls
-    -- lspconfig.emmet_ls.setup {
-    --   filetypes = {
-    --     'html',
-    --     'css',
-    --     'scss',
-    --     'javascript',
-    --     'typescriptreact',
-    --     'javascriptreact',
-    --     'haml',
-    --     'xml',
-    --     'xsl',
-    --     'pug',
-    --     'slim',
-    --     'sass',
-    --     'stylus',
-    --     'less',
-    --     'sss',
-    --     'hbs',
-    --     'handlebars',
-    --   },
-    --   capabilities = cmp_capabilities,
-    -- }
+      filetypes = { 'css', 'scss', 'less' },
+      capabilities = capabilities,
+    })
 
     -- python
-    lspconfig.pyright.setup {
-      capabilities = cmp_capabilities,
-    }
+    vim.lsp.config('pyright', {
+      capabilities = capabilities,
+    })
 
     -- html
-    lspconfig.html.setup {
-      capabilities = cmp_capabilities,
-    }
+    vim.lsp.config('html', {
+      capabilities = capabilities,
+    })
+
+    -- Enable all configured LSP servers
+    vim.lsp.enable('graphql', 'lua_ls', 'prismals', 'cssls', 'pyright', 'html')
   end,
 }

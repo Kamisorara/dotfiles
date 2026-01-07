@@ -24,12 +24,11 @@ return {
       'jsonls',
       'lua_ls',
       'pyright',
-      'html',
       -- 'tsserver', -- 使用了 pmizio/typescript-tools.nvim 作为 TypeScript 的 LSP 插件
     }
 
     require('mason-lspconfig').setup {
-      ensure_installed = lsp_servers, -- 确保 LSP 服务器已安装
+      ensure_installed = lsp_servers,
     }
 
     require('mason-tool-installer').setup {
