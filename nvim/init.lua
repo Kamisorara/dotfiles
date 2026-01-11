@@ -29,4 +29,10 @@ require('lazy').setup('plugins', {
   rocks = {
     enabled = false,
   },
+  checker = {
+    enabled = false, -- 禁用自动检查更新
+  },
+  change_detection = {
+    enabled = false, -- 禁用配置变更检测
+  },
 })
