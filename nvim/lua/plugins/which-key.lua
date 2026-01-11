@@ -21,8 +21,6 @@ return {
     win = {
       border = 'none',
       position = 'bottom',
-      -- Leave 1 line at top / bottom for bufferline / lualine
-      margin = { 1, 0, 1, 0 },
       padding = { 1, 0, 1, 0 },
       wo = {
         winblend = 0,

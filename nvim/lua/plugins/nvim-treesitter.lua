@@ -25,9 +25,10 @@ return {
           'markdown',
           'markdown_inline',
           'diff',
+          'vue',
         },
 
-        sync_install = false,
+        sync_install = true,
 
         auto_install = true,
 

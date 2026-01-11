@@ -1,7 +1,7 @@
 return {
   'pmizio/typescript-tools.nvim',
   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-  event = 'VeryLazy',
+  ft = { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' },
   config = function()
     local api = require 'typescript-tools.api'
 
@@ -21,7 +21,7 @@ return {
         -- 标签闭合
         jsx_close_tag = {
           enable = true,
-          filetypes = { 'javascriptreact', 'typescriptreact' },
+          filetypes = { 'javascriptreact', 'typescriptreact', 'vue' },
         },
         -- Enable React Native file detection
         complete_function_calls = true,

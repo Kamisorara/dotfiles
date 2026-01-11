@@ -15,16 +15,16 @@ return {
       },
     }
 
-    -- 添加 LSP 服务器列表
+    -- 添加 LSP 服务器列表 (vue_ls 需要手动配置)
     local lsp_servers = {
       'clangd',
       'cssls',
       'emmet_ls',
       'html',
       'jsonls',
+      'jdtls', -- Java
       'lua_ls',
       'pyright',
-      -- 'tsserver', -- 使用了 pmizio/typescript-tools.nvim 作为 TypeScript 的 LSP 插件
     }
 
     require('mason-lspconfig').setup {
@@ -33,19 +33,20 @@ return {
 
     require('mason-tool-installer').setup {
       ensure_installed = {
-        'stylua',
-        'eslint_d',
-        'prettierd',
-        'graphql-language-service-cli',
-        'prisma-language-server',
         'autopep8',
+        'eslint_d',
         'fixjson',
-        'prettier',
-        'shfmt',
-        'isort',
-        'black',
+        'google-java-format', -- Java formatter
+        'graphql-language-service-cli',
         'html-lsp',
-      }, -- 保留非 LSP 工具的安装
+        'prettier',
+        'prettierd',
+        'prisma-language-server',
+        'shfmt',
+        'stylua',
+        -- 'black', -- 已通过 pip 安装
+        -- 'isort', -- 已通过 pip 安装
+      },
     }
   end,
 }

@@ -70,7 +70,20 @@ return {
       capabilities = capabilities,
     })
 
+    -- vue (Volar) - 使用完整路径因为 vue-language-server 不在 PATH 中
+    vim.lsp.config('vue_ls', {
+      cmd = {
+        'node',
+        vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server/bin/vue-language-server.js',
+        '--stdio',
+      },
+      filetypes = { 'vue' },
+      capabilities = capabilities,
+      root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', '.git'),
+    })
+
     -- Enable all configured LSP servers
-    vim.lsp.enable('graphql', 'lua_ls', 'prismals', 'cssls', 'pyright', 'html')
+    -- 注意: ts_ls 由 typescript-tools.nvim 管理
+    vim.lsp.enable('graphql', 'lua_ls', 'prismals', 'cssls', 'pyright', 'html', 'vue_ls')
   end,
 }
