@@ -15,7 +15,7 @@ return {
       },
     }
 
-    -- 添加 LSP 服务器列表 (vue_ls 需要手动配置)
+    -- 添加 LSP 服务器列表
     local lsp_servers = {
       'clangd',
       'cssls',
@@ -25,6 +25,8 @@ return {
       'jdtls', -- Java
       'lua_ls',
       'pyright',
+      'vtsls', -- TypeScript with Vue support
+      'vue_ls', -- Vue language server
     }
 
     require('mason-lspconfig').setup {
@@ -44,6 +46,7 @@ return {
         'prisma-language-server',
         'shfmt',
         'stylua',
+        'vue-language-server', -- Vue LSP (Volar)
         -- 'black', -- 已通过 pip 安装
         -- 'isort', -- 已通过 pip 安装
       },

@@ -21,7 +21,7 @@ return {
         -- 标签闭合
         jsx_close_tag = {
           enable = true,
-          filetypes = { 'javascriptreact', 'typescriptreact', 'vue' },
+          filetypes = { 'javascriptreact', 'typescriptreact' },
         },
         -- Enable React Native file detection
         complete_function_calls = true,

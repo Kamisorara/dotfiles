@@ -76,5 +76,11 @@ vim.env.PATH = vim.env.HOME .. '/Library/Python/3.9/bin:' .. vim.env.PATH
 
 vim.cmd [[
     autocmd TermOpen * setlocal nonumber norelativenumber -- 在终端模式中禁用行号和相对行号
-    autocmd BufRead,BufNewFile *.vue setfiletype vue -- 确保 .vue 文件被正确识别
 ]]
+
+-- 文件类型检测
+vim.filetype.add {
+  extension = {
+    vue = 'vue',
+  },
+}
