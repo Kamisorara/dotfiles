@@ -20,7 +20,6 @@ return {
     },
     win = {
       border = 'none',
-      position = 'bottom',
       padding = { 1, 0, 1, 0 },
       wo = {
         winblend = 0,
