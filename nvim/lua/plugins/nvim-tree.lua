@@ -47,7 +47,21 @@ return {
         },
         filters = {
           dotfiles = false,
-          custom = { 'node_modules', '.git/' },
+          custom = {
+            'node_modules',
+            '.git/',
+            '.DS_Store',
+            '__pycache__',
+            '*.pyc',
+            'venv',
+            '.venv',
+            'env',
+            '.env',
+            '.pytest_cache',
+            '.mypy_cache',
+            'dist',
+            'build',
+          },
           exclude = { '.gitignore' },
         },
         diagnostics = {
