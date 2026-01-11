@@ -22,7 +22,6 @@ return {
       'emmet_ls',
       'html',
       'jsonls',
-      'jdtls', -- Java
       'lua_ls',
       'pyright',
       'vtsls', -- TypeScript with Vue support
@@ -38,7 +37,6 @@ return {
         'autopep8',
         'eslint_d',
         'fixjson',
-        'google-java-format', -- Java formatter
         'graphql-language-service-cli',
         'html-lsp',
         'prettier',
