@@ -57,7 +57,7 @@ opt.splitright = true -- 垂直分割窗口时在右侧打开新窗口
 
 opt.smoothscroll = true -- Neovim 原生平滑滚动（替代 neoscroll.nvim）
 
-g.completeopt = 'menu,menuone,noinsert,noselect' -- 启用自动完成菜单，并禁止自动选择第一个选项
+opt.completeopt = 'menu,menuone,noinsert,noselect' -- 启用自动完成菜单，并禁止自动选择第一个选项
 opt.wildmenu = true -- 启用命令行的补全菜单
 
 opt.termguicolors = true -- 启用终端的 24 位真彩色支持

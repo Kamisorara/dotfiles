@@ -23,7 +23,12 @@ return {
             globals = { 'vim' },
           },
           workspace = {
-            library = vim.api.nvim_get_runtime_file('', true),
+            -- 只索引 Neovim runtime + lazy.nvim；用 nvim_get_runtime_file('', true)
+            -- 会把全部 46 个插件的源码都塞给 lua_ls，明显拖慢索引并增加内存
+            library = {
+              vim.env.VIMRUNTIME,
+              vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua',
+            },
             checkThirdParty = false,
           },
           telemetry = {

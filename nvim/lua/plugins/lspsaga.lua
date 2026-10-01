@@ -17,8 +17,6 @@ return {
       },
     }
 
-    local builtin = require 'telescope.builtin'
-
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('UserLspConfig', {}),
       callback = function(ev)
@@ -57,13 +55,7 @@ return {
           '<cmd>Lspsaga code_action<cr>',
           opts
         )
-        vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
-        vim.keymap.set(
-          'n',
-          '<space>lk',
-          '<cmd>Lspsaga hover_doc<cr>',
-          { silent = true }
-        )
+        -- 引用查找用 0.11+ 内置的 grr（此处映射裸 gr 会与 grn/gra 等前缀叠加产生等待）
         vim.keymap.set('n', '<leader>lh', ':Lspsaga hover_doc<CR>')
         vim.keymap.set('n', '<leader>lR', ':Lspsaga lsp_finder<CR>')
         vim.keymap.set(

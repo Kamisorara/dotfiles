@@ -92,11 +92,11 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 | `<leader>ld` | 普通 | 跳转到定义 |
 | `<leader>lr` | 普通 | 重命名 |
 | `<leader>lc` | 普通/可视 | 代码操作 |
-| `gr` | 普通 | 查找引用 |
-| `<leader>lk` / `<leader>lh` | 普通 | 悬停文档 |
+| `grr` | 普通 | 查找引用（Neovim 0.11+ 内置） |
+| `<leader>lh` | 普通 | 悬停文档 |
 | `<leader>lR` | 普通 | LSP 查找器（引用/定义/实现） |
 | `<leader>li` | 普通 | 跳转到实现 |
-| `<leader>lo` | 普通 | 符号大纲 |
+| `<leader>o` | 普通 | 符号大纲 |
 | `<leader>lP` | 普通 | 显示当前行诊断 |
 | `<leader>ln` | 普通 | 下一个诊断 |
 | `<leader>lp` | 普通 | 上一个诊断 |
@@ -146,7 +146,7 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 | `<leader>hp` | Hop 快速跳转到单词 |
 | `]t` | 下一个 TODO 注释 |
 | `[t` | 上一个 TODO 注释 |
-| `<leader>t` | 搜索 TODO 注释 (Telescope) |
+| `<leader>tt` | 搜索 TODO 注释 (Telescope) |
 
 ### 工具 (`<leader>u`)
 
@@ -212,7 +212,7 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 |------|------|
 | `:UndotreeToggle` | 切换撤销树（快捷键: `<leader>uu`） |
 | `:NvimTreeToggle` | 切换文件浏览器（快捷键: `<leader>e`） |
-| `:TodoTelescope` | 搜索 TODO 注释（快捷键: `<leader>t`） |
+| `:TodoTelescope` | 搜索 TODO 注释（快捷键: `<leader>tt`） |
 | `:Noice` | Noice 命令日志 |
 | `:Neogit` | 打开 Git 界面（快捷键: `<leader>gt`） |
 

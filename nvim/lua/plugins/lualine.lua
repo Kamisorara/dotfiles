@@ -1,6 +1,7 @@
 return {
   'nvim-lualine/lualine.nvim',
-  -- version = 'compat-nvim-0.6',
+  -- UI 就绪后再加载，不占启动关键路径
+  event = 'VeryLazy',
   config = function()
     require('lualine').setup {
       sections = {
