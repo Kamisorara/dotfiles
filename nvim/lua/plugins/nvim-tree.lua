@@ -3,10 +3,12 @@ return {
     'nvim-tree/nvim-tree.lua',
     version = 'v1.11.0',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
+    init = function()
+      -- 必须在插件加载前禁用 netrw
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
-
+    end,
+    config = function()
       local api = require 'nvim-tree.api'
       vim.keymap.set('n', '<leader>e', api.tree.toggle)
 
@@ -43,7 +45,7 @@ return {
           update_cwd = true,
         },
         git = {
-          enable = false,
+          enable = true, -- 文件树里显示 git 修改标记
         },
         filters = {
           dotfiles = false,

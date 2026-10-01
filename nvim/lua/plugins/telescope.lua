@@ -3,7 +3,6 @@ return {
   -- version = '0.1.8',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'LinArcX/telescope-env.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
@@ -62,7 +61,6 @@ return {
     local telescope = require 'telescope'
     telescope.setup(opts)
     pcall(telescope.load_extension, 'fzf')
-    pcall(telescope.load_extension, 'env')
   end,
   keys = {
     {
@@ -81,8 +79,45 @@ return {
     },
     {
       '<leader>te',
-      ':Telescope env<CR>',
-      desc = 'n',
+      function()
+        -- 浏览环境变量（替代已失效的 LinArcX/telescope-env.nvim）
+        local pickers = require 'telescope.pickers'
+        local finders = require 'telescope.finders'
+        local conf = require('telescope.config').values
+
+        local entries = {}
+        for k, v in pairs(vim.fn.environ()) do
+          entries[#entries + 1] = string.format('%s=%s', k, v)
+        end
+        table.sort(entries)
+
+        pickers.new({}, {
+          prompt_title = 'Environment Variables',
+          sorter = conf.generic_sorter {},
+          finder = finders.new_table { results = entries },
+        }):find()
+      end,
+      desc = 'environment variables',
+    },
+    -- git 查找
+    {
+      '<leader>gc',
+      ':Telescope git_commits<CR>',
+      desc = 'git commits',
+      silent = true,
+      noremap = true,
+    },
+    {
+      '<leader>gC',
+      ':Telescope git_bcommits<CR>',
+      desc = 'git commits (current file)',
+      silent = true,
+      noremap = true,
+    },
+    {
+      '<leader>gS',
+      ':Telescope git_status<CR>',
+      desc = 'git status',
       silent = true,
       noremap = true,
     },
