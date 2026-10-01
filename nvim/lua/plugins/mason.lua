@@ -17,11 +17,13 @@ return {
     }
 
     -- LSP 服务器（mason-lspconfig 会安装并注册对应的 mason 包）
+    -- 注意 jdtls 只负责安装，启动由 lua/plugins/lsp-java.lua（nvim-jdtls）接管
     local lsp_servers = {
       'clangd',
       'cssls',
       'emmet_ls',
       'html',
+      'jdtls',
       'jsonls',
       'lua_ls',
       'prismals',
@@ -32,17 +34,21 @@ return {
 
     require('mason-lspconfig').setup {
       ensure_installed = lsp_servers,
+      -- 关闭自动启用：服务器统一在 lspconfig.lua 里显式 vim.lsp.enable；
+      -- 也避免 lspconfig 的 jdtls 与 nvim-jdtls 双启动
+      automatic_enable = false,
     }
 
     -- 格式化/Lint 工具，与 conform.nvim 的 formatters_by_ft 对应
     require('mason-tool-installer').setup {
       ensure_installed = {
         'eslint_d',
+        'google-java-format',
         'graphql-language-service-cli',
         'prettierd', -- 只保留 prettierd，不再重复安装 prettier
+        'ruff', -- python 格式化 + import 排序（Rust 单二进制，无 Python 依赖）
         'shfmt',
         'stylua',
-        -- python 的 black/isort 已通过 pip 安装
       },
     }
   end,

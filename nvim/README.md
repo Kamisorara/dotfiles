@@ -5,16 +5,19 @@
 ## 特性
 
 - **插件管理器**: lazy.nvim
-- **LSP 支持**: TypeScript/JavaScript (vtsls), Vue (vue_ls), Python, GraphQL, Lua, Prisma, CSS, HTML
+- **LSP 支持**: TypeScript/JavaScript (vtsls), Vue (vue_ls), Java (nvim-jdtls), Python, GraphQL, Lua, Prisma, CSS, HTML
 - **自动补全**: nvim-cmp（支持 LSP、代码片段、缓冲区和路径）
 - **Git 集成**: Gitsigns, Neogit, Diffview, Telescope git pickers
 
 ### 环境依赖
 
-- Neovim >= 0.11
+- Neovim >= 0.11、git、Node.js 18+（vtsls / pyright / prettierd 等 npm 系工具需要）
+- JDK 17+（仅 Java 项目）
 - [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter-cli)（`main` 分支的 nvim-treesitter 用它编译解析器）：`npm install -g tree-sitter-cli` 或 `cargo install tree-sitter-cli` 或 `brew install tree-sitter`
 - C 编译器（编译解析器用）；Windows 上还需设置 `CC=gcc`（tree-sitter CLI 默认找 MSVC 的 cl.exe）
 - `rg`（ripgrep，Telescope live_grep 用）
+
+LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无需预装系统 Python**：解释器自动使用项目根的 `.venv`（标准 venv / uv / poetry 均可，不激活也能正确分析），格式化用 ruff（独立二进制，零 Python 依赖）。
 - **模糊查找**: Telescope
 - **配色方案**: Everforest
 
@@ -99,12 +102,12 @@
 | `<leader>lp` | 普通 | 上一个诊断 |
 | `<leader>ly` | 普通 | 复制行诊断 |
 
-### TypeScript 工具（vtsls）
+### TypeScript / Java 工具
 
 | 按键 | 功能 |
 |-----|------|
-| `<leader>m` | 整理 imports |
-| `<leader>a` | 添加缺失的 imports |
+| `<leader>m` | 整理 imports（TS: vtsls / Java: nvim-jdtls） |
+| `<leader>a` | 添加缺失的 imports（vtsls） |
 
 ### Telescope 模糊查找 (`<leader>f`, `<leader>t`)
 
@@ -236,6 +239,7 @@ nvim/
 │       ├── diffview.lua  # git diff / 历史
 │       ├── gitsigns.lua
 │       ├── hop.lua
+│       ├── lsp-java.lua    # Java LSP (nvim-jdtls)
 │       ├── lspconfig.lua # vtsls + vue_ls 等 LSP
 │       ├── lspsaga.lua
 │       ├── lualine.lua

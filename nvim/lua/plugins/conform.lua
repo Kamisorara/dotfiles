@@ -9,8 +9,10 @@ return {
         json = { 'prettierd' },
         lua = { 'stylua' },
         graphql = { 'prettierd' },
+        java = { 'google-java-format' },
         markdown = { 'prettierd' },
-        python = { 'isort', 'black' },
+        -- ruff: 排序 imports + 格式化（black 风格，读项目 pyproject.toml 配置）
+        python = { 'ruff_organize_imports', 'ruff_format' },
         typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
         vue = { 'prettierd' },

@@ -5,7 +5,20 @@ return {
     'nvim-lua/plenary.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
+      -- 没有 make（常见于 Windows）时优雅跳过，退回内置排序器
+      build = function()
+        if vim.fn.executable 'make' ~= 1 then
+          vim.notify(
+            'telescope-fzf-native: 未找到 make，跳过本地构建，使用默认排序器',
+            vim.log.levels.WARN
+          )
+          return
+        end
+        local ok = pcall(vim.fn.system, { 'make' })
+        if not ok or vim.v.shell_error ~= 0 then
+          vim.notify('telescope-fzf-native 构建失败，使用默认排序器', vim.log.levels.WARN)
+        end
+      end,
     },
   },
   opts = {

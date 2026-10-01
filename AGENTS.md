@@ -20,6 +20,7 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 - Adding a plugin: create a new file in `lua/plugins/` named after the plugin, returning a lazy spec; prefer lazy loading (`event = 'VeryLazy'`, `keys`, `ft`, or `cmd`).
 - Adding an LSP server: add to `ensure_installed` in `lua/plugins/mason.lua` and configure with `vim.lsp.config(...)` + `vim.lsp.enable {...}` in `lua/plugins/lspconfig.lua` (0.11+ API).
 - Adding a formatter: add to mason `ensure_installed` plus `formatters_by_ft` in `lua/plugins/conform.lua` (format-on-save is the only formatting entry point).
+- Linting: `lua/plugins/lint.lua` wires nvim-lint + eslint_d for js/ts/jsx/tsx/vue; it only runs when the project has an eslint config (flat or legacy). Python formatting is ruff; Python linting is not wired.
 - Leader key is `<Space>` in Neovim; tmux prefix is `C-f` (default `C-b` is unbound). Git keymaps live under `<leader>g` (gitsigns in `gitsigns.lua`, diffview + telescope git pickers in their own specs).
 
 ## Gotchas
@@ -33,7 +34,8 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 - `which-key.lua` uses the **v3 API** (`wk.add { { '<leader>x', group = '...' } }`), not the old `wk.register`.
 - Scrolling uses Neovim's native `smoothscroll` (`base.lua`); background transparency is the native module `lua/transparent.lua` (`:TransparentToggle` to switch). neoscroll.nvim, nvim-notify (archived) and nvim-transparent (unmaintained since 2022) were removed on purpose — don't re-add them.
 - `nvim-tree` is pinned to `v1.11.0`; when bumping, check `:h nvim-tree-opts-filters` — `filters.custom` may be renamed in newer versions.
-- Java LSP support was removed; `nvim/CLAUDE.md` (gitignored, local-only) still mentions it and is outdated — trust the code and git log over it.
+- Java LSP runs via nvim-jdtls in `lua/plugins/lsp-java.lua` (per-project workspace dirs under `stdpath('data')/jdtls-workspaces`; skipped when no project root is found). mason-lspconfig `automatic_enable` is off so lspconfig's `jdtls` never double-starts — every server that should auto-attach must be listed in the `vim.lsp.enable` table in `lspconfig.lua`.
+- `nvim/CLAUDE.md` (gitignored, local-only) is outdated — trust the code and git log over it.
 - `*.lua.bak` files (e.g. `tailwind-tools.lua.bak`) are disabled configs kept intentionally; don't delete or "restore" them.
 
 ## Docs to read before editing

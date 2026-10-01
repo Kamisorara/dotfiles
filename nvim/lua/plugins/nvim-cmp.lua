@@ -79,9 +79,10 @@ return {
       }),
     })
 
-    -- snippets
+    -- snippets：跟随配置目录（symlink/junction 后即本仓库的 snippets/），
+    -- 不用写死 ~/.config 路径，Windows 上也能找到
     require('luasnip.loaders.from_vscode').load {
-      paths = { '~/.config/nvim/snippets' },
+      paths = { vim.fn.stdpath 'config' .. '/snippets' },
     }
   end,
 }
