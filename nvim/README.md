@@ -224,6 +224,7 @@ nvim/
 │   ├── base.lua          # Neovim 基础选项
 │   ├── keymap.lua        # 全局快捷键
 │   ├── symbols.lua       # 图标字典
+│   ├── transparent.lua   # 原生背景透明（:TransparentToggle）
 │   └── plugins/          # 插件配置（一个插件一个文件）
 │       ├── auto-save.lua
 │       ├── bufferline.lua
@@ -244,7 +245,6 @@ nvim/
 │       ├── nvim-autopair.lua
 │       ├── nvim-cmp.lua
 │       ├── nvim-cursorline.lua
-│       ├── nvim-transparent.lua
 │       ├── nvim-tree.lua
 │       ├── nvim-treesitter.lua
 │       ├── surround.lua

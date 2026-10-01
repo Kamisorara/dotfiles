@@ -6,7 +6,7 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 
 - `.zimrc` — Zim module list for zsh (comments in Chinese).
 - `nvim/` — Neovim config, requires Neovim >= 0.10.
-  - `init.lua` bootstraps lazy.nvim, then loads `lua/base.lua` (options) and `lua/keymap.lua` (global maps), then `require('lazy').setup('plugins')`.
+  - `init.lua` bootstraps lazy.nvim, then loads `lua/base.lua` (options), `lua/keymap.lua` (global maps) and `lua/transparent.lua` (native background transparency), then `require('lazy').setup('plugins')`.
   - `lua/plugins/` — one file per plugin, each returning a lazy.nvim spec table; auto-loaded by lazy.nvim.
   - `lazy-lock.json` — pinned plugin versions (commit after plugin changes).
   - `snippets/` — VS Code-style JSON snippets loaded via LuaSnip.
@@ -31,7 +31,7 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 - `vim.lsp.enable` takes a single name or a table of names, never multiple string arguments (this was a real bug once).
 - mason specs use the `mason-org/*` repos (renamed from `williamboman/*`).
 - `which-key.lua` uses the **v3 API** (`wk.add { { '<leader>x', group = '...' } }`), not the old `wk.register`.
-- Scrolling uses Neovim's native `smoothscroll` (`base.lua`); neoscroll.nvim and nvim-notify were removed for a lighter setup — don't re-add casually.
+- Scrolling uses Neovim's native `smoothscroll` (`base.lua`); background transparency is the native module `lua/transparent.lua` (`:TransparentToggle` to switch). neoscroll.nvim, nvim-notify (archived) and nvim-transparent (unmaintained since 2022) were removed on purpose — don't re-add them.
 - `nvim-tree` is pinned to `v1.11.0`; when bumping, check `:h nvim-tree-opts-filters` — `filters.custom` may be renamed in newer versions.
 - Java LSP support was removed; `nvim/CLAUDE.md` (gitignored, local-only) still mentions it and is outdated — trust the code and git log over it.
 - `*.lua.bak` files (e.g. `tailwind-tools.lua.bak`) are disabled configs kept intentionally; don't delete or "restore" them.
