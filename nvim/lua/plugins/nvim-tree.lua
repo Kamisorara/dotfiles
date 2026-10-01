@@ -1,8 +1,18 @@
 return {
   {
     'nvim-tree/nvim-tree.lua',
-    version = 'v1.11.0',
+    version = 'v1.18.0',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+    -- 按键懒加载：打开文件树时才加载整个插件（省约 50ms 启动时间）
+    keys = {
+      {
+        '<leader>e',
+        function()
+          require('nvim-tree.api').tree.toggle()
+        end,
+        desc = 'nvim-tree: toggle',
+      },
+    },
     init = function()
       -- 必须在插件加载前禁用 netrw
       vim.g.loaded_netrw = 1
@@ -10,7 +20,6 @@ return {
     end,
     config = function()
       local api = require 'nvim-tree.api'
-      vim.keymap.set('n', '<leader>e', api.tree.toggle)
 
       local function my_on_attach(bufnr)
         local function opts(desc)
@@ -23,8 +32,9 @@ return {
           }
         end
 
-        -- default mappings
-        api.config.mappings.default_on_attach(bufnr)
+        -- default mappings（v1.18 起 api.config.mappings.default_on_attach
+        -- 改名为 api.map.on_attach.default）
+        api.map.on_attach.default(bufnr)
 
         -- custom mappings
         vim.keymap.set('n', '<leader>e', api.tree.toggle, opts 'Toggle')
@@ -42,7 +52,10 @@ return {
         on_attach = my_on_attach,
         update_focused_file = {
           enable = true,
-          update_cwd = true,
+          -- v1.18 起 update_cwd 布尔值改为 update_root 表
+          update_root = {
+            enable = true,
+          },
         },
         git = {
           enable = true, -- 文件树里显示 git 修改标记
