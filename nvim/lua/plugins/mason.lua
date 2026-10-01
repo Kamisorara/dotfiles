@@ -1,7 +1,8 @@
 return {
-  'williamboman/mason.nvim',
+  -- 仓库已从 williamboman/* 迁移到 mason-org/*（旧地址靠 GitHub 重定向）
+  'mason-org/mason.nvim',
   dependencies = {
-    'williamboman/mason-lspconfig.nvim',
+    'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
   },
   config = function()
@@ -15,7 +16,7 @@ return {
       },
     }
 
-    -- 添加 LSP 服务器列表
+    -- LSP 服务器（mason-lspconfig 会安装并注册对应的 mason 包）
     local lsp_servers = {
       'clangd',
       'cssls',
@@ -23,6 +24,7 @@ return {
       'html',
       'jsonls',
       'lua_ls',
+      'prismals',
       'pyright',
       'vtsls', -- TypeScript with Vue support
       'vue_ls', -- Vue language server
@@ -32,21 +34,15 @@ return {
       ensure_installed = lsp_servers,
     }
 
+    -- 格式化/Lint 工具，与 conform.nvim 的 formatters_by_ft 对应
     require('mason-tool-installer').setup {
       ensure_installed = {
-        'autopep8',
         'eslint_d',
-        'fixjson',
         'graphql-language-service-cli',
-        'html-lsp',
-        'prettier',
-        'prettierd',
-        'prisma-language-server',
+        'prettierd', -- 只保留 prettierd，不再重复安装 prettier
         'shfmt',
         'stylua',
-        'vue-language-server', -- Vue LSP (Volar)
-        -- 'black', -- 已通过 pip 安装
-        -- 'isort', -- 已通过 pip 安装
+        -- python 的 black/isort 已通过 pip 安装
       },
     }
   end,

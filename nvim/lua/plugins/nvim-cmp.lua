@@ -1,6 +1,8 @@
 return {
   'hrsh7th/nvim-cmp',
-  event = 'VeryLazy',
+  -- InsertEnter 才加载补全（进入插入模式或命令行时），
+  -- 避免 VeryLazy 阶段一次性加载全部 source
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'hrsh7th/cmp-buffer', -- source for text in buffer
     'hrsh7th/cmp-path', -- source for file system paths
@@ -54,20 +56,10 @@ return {
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'luasnip' }, -- For luasnip users.
-        { name = 'crates' },
       }, {
         { name = 'buffer' },
       }),
     }
-
-    -- Set configuration for specific filetype.
-    cmp.setup.filetype('gitcommit', {
-      sources = cmp.config.sources({
-        { name = 'git' }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-      }, {
-        { name = 'buffer' },
-      }),
-    })
 
     -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
     cmp.setup.cmdline({ '/', '?' }, {

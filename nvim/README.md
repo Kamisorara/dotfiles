@@ -5,9 +5,16 @@
 ## 特性
 
 - **插件管理器**: lazy.nvim
-- **LSP 支持**: TypeScript/JavaScript, Vue, Java, Python, GraphQL, Lua, Prisma, CSS, HTML
+- **LSP 支持**: TypeScript/JavaScript (vtsls), Vue (vue_ls), Python, GraphQL, Lua, Prisma, CSS, HTML
 - **自动补全**: nvim-cmp（支持 LSP、代码片段、缓冲区和路径）
-- **Git 集成**: Gitsigns, Neogit
+- **Git 集成**: Gitsigns, Neogit, Diffview, Telescope git pickers
+
+### 环境依赖
+
+- Neovim >= 0.11
+- [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter-cli)（`main` 分支的 nvim-treesitter 用它编译解析器）：`npm install -g tree-sitter-cli` 或 `cargo install tree-sitter-cli` 或 `brew install tree-sitter`
+- C 编译器（编译解析器用）；Windows 上还需设置 `CC=gcc`（tree-sitter CLI 默认找 MSVC 的 cl.exe）
+- `rg`（ripgrep，Telescope live_grep 用）
 - **模糊查找**: Telescope
 - **配色方案**: Everforest
 
@@ -57,14 +64,23 @@
 
 | 按键 | 功能 |
 |-----|------|
-| `<leader>gn` | 跳转到下一个 hunk |
-| `<leader>gp` | 跳转到上一个 hunk |
+| `<leader>gn` / `]h` | 跳转到下一个 hunk |
+| `<leader>gp` / `[h` | 跳转到上一个 hunk |
 | `<leader>gP` | 预览 hunk |
-| `<leader>gs` | 暂存 hunk |
-| `<leader>gu` | 取消暂存 hunk |
-| `<leader>gr` | 重置 hunk |
+| `<leader>gs` | 暂存 hunk（可视模式暂存选中行；对已暂存的 hunk 再按一次取消暂存） |
+| `<leader>gr` | 重置 hunk（可视模式重置选中行） |
+| `<leader>gu` | 取消暂存整个缓冲区 |
 | `<leader>gb` | 暂存整个缓冲区 |
+| `<leader>gl` | 开关当前行的 git blame |
+| `<leader>gd` | 当前文件与暂存区对比 |
+| `<leader>gD` | 当前文件与 HEAD 对比 |
+| `ih` | hunk 文本对象（`dih`/`yih`/`cih`） |
 | `<leader>gt` | 打开 Neogit |
+| `<leader>go` / `<leader>gq` | Diffview 打开/关闭（审阅全部改动） |
+| `<leader>gh` / `<leader>gH` | 当前文件/整个仓库的提交历史 (Diffview) |
+| `<leader>gc` | 搜索所有提交 (Telescope) |
+| `<leader>gC` | 搜索当前文件的提交 (Telescope) |
+| `<leader>gS` | 查看 git status (Telescope) |
 
 ### LSP 操作 (`<leader>l`)
 
@@ -83,7 +99,7 @@
 | `<leader>lp` | 普通 | 上一个诊断 |
 | `<leader>ly` | 普通 | 复制行诊断 |
 
-### TypeScript 工具
+### TypeScript 工具（vtsls）
 
 | 按键 | 功能 |
 |-----|------|
@@ -135,13 +151,6 @@
 |-----|------|
 | `<leader>uu` | 切换撤销树 |
 
-### Treesitter 增量选择
-
-| 按键 | 功能 |
-|-----|------|
-| `<enter>` | 开始/扩大选择范围 |
-| `<bs>` | 缩小选择范围 |
-
 ### 自动补全（插入模式）
 
 | 按键 | 功能 |
@@ -151,17 +160,7 @@
 
 ### 平滑滚动
 
-| 按键 | 功能 |
-|-----|------|
-| `<C-u>` | 向上滚动半屏 |
-| `<C-d>` | 向下滚动半屏 |
-| `<C-b>` | 向上滚动一屏 |
-| `<C-f>` | 向下滚动一屏 |
-| `<C-y>` | 向上滚动 |
-| `<C-e>` | 向下滚动 |
-| `zt` | 当前行置顶 |
-| `zz` | 当前行居中 |
-| `zb` | 当前行置底 |
+已启用 Neovim 原生 `smoothscroll`（不再使用 neoscroll.nvim），`<C-u>`/`<C-d>`/`zt`/`zz`/`zb` 等按键为原生行为。
 
 ### Which-Key 分组
 
@@ -224,37 +223,35 @@ nvim/
 ├── lua/
 │   ├── base.lua          # Neovim 基础选项
 │   ├── keymap.lua        # 全局快捷键
-│   └── plugins/          # 插件配置
+│   ├── symbols.lua       # 图标字典
+│   └── plugins/          # 插件配置（一个插件一个文件）
 │       ├── auto-save.lua
-│       ├── base.lua
 │       ├── bufferline.lua
-│       ├── clipboard.lua
 │       ├── colorizer.lua
-│       ├── Comment.nvim
-│       ├── conform.lua
-│       ├── dashboard-nvim.lua
-│       ├── everforest.lua
+│       ├── colorscheme.lua
+│       ├── comment.lua
+│       ├── conform.lua   # 保存时格式化（唯一的格式化入口）
+│       ├── dashboard.lua
+│       ├── diffview.lua  # git diff / 历史
 │       ├── gitsigns.lua
 │       ├── hop.lua
-│       ├── lsp-java.lua
-│       ├── lsp-typescript-tools.lua
-│       ├── lspconfig.lua
+│       ├── lspconfig.lua # vtsls + vue_ls 等 LSP
 │       ├── lspsaga.lua
+│       ├── lualine.lua
 │       ├── mason.lua
 │       ├── neogit.lua
-│       ├── neoscroll.lua
-│       ├── noice.nvim
-│       ├── nvim-autopairs.lua
+│       ├── noice.lua
+│       ├── nvim-autopair.lua
 │       ├── nvim-cmp.lua
 │       ├── nvim-cursorline.lua
-│       ├── nvim-notify.lua
-│       ├── nvim-treesitter.lua
-│       ├── nvim-tree.lua
 │       ├── nvim-transparent.lua
+│       ├── nvim-tree.lua
+│       ├── nvim-treesitter.lua
+│       ├── surround.lua
 │       ├── telescope.lua
 │       ├── todo-comments.lua
 │       ├── undotree.lua
-│       ├── vim-surround.lua
 │       └── which-key.lua
+├── snippets/             # VS Code 格式代码片段
 └── lazy-lock.json       # 插件版本锁定文件
 ```

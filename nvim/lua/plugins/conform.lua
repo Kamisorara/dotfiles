@@ -22,7 +22,9 @@ return {
       format_on_save = {
         -- These options will be passed to conform.format()
         timeout_ms = 500,
-        lsp_fallback = true,
+        -- 没有配置专用 formatter 的文件类型回退到 LSP 格式化
+        -- （lsp_fallback 选项已弃用，改用 lsp_format）
+        lsp_format = 'fallback',
       },
     }
   end,
