@@ -1,5 +1,8 @@
 return {
   'neovim/nvim-lspconfig',
+  dependencies = {
+    'hrsh7th/cmp-nvim-lsp', -- LSP 补全 capabilities
+  },
   config = function()
     -- Enhance capabilities with nvim-cmp (completion plugin)
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -98,15 +101,24 @@ return {
       capabilities = capabilities,
     })
 
-    -- vue_ls (Vue language server)
+    -- vue_ls (Vue language server)，root 目录由上游默认配置决定
     vim.lsp.config('vue_ls', {
       filetypes = { 'vue' },
       capabilities = capabilities,
-      root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', '.git'),
     })
 
     -- Enable all configured LSP servers
     -- 注意: vtsls 替代了 typescript-tools.nvim 用于 TypeScript + Vue
-    vim.lsp.enable('graphql', 'lua_ls', 'prismals', 'cssls', 'pyright', 'html', 'vtsls', 'vue_ls')
+    -- vim.lsp.enable 只接受单个名字或一个 table，不能传多个参数
+    vim.lsp.enable {
+      'graphql',
+      'lua_ls',
+      'prismals',
+      'cssls',
+      'pyright',
+      'html',
+      'vtsls',
+      'vue_ls',
+    }
   end,
 }

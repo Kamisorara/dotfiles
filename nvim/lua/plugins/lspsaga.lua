@@ -26,6 +26,24 @@ return {
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
         local opts = { buffer = ev.buf }
+
+        -- vtsls: 整理/添加 imports（原 typescript-tools.nvim 的功能）
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client and client.name == 'vtsls' then
+          vim.keymap.set('n', '<leader>m', function()
+            vim.lsp.buf.code_action {
+              context = { only = { 'source.organizeImports' }, diagnostics = {} },
+              apply = true,
+            }
+          end, { buffer = ev.buf, desc = 'organize imports' })
+          vim.keymap.set('n', '<leader>a', function()
+            vim.lsp.buf.code_action {
+              context = { only = { 'source.addMissingImports.ts' }, diagnostics = {} },
+              apply = true,
+            }
+          end, { buffer = ev.buf, desc = 'add missing imports' })
+        end
+
         vim.keymap.set(
           'n',
           '<leader>ld',
@@ -60,33 +78,5 @@ return {
         vim.keymap.set('n', '<leader>o', ':Lspsaga outline<CR>')
       end,
     })
-
-    -- error lens
-    vim.fn.sign_define {
-      {
-        name = 'DiagnosticSignError',
-        text = '',
-        texthl = 'DiagnosticSignError',
-        linehl = 'ErrorLine',
-      },
-      {
-        name = 'DiagnosticSignWarn',
-        text = '',
-        texthl = 'DiagnosticSignWarn',
-        linehl = 'WarningLine',
-      },
-      {
-        name = 'DiagnosticSignInfo',
-        text = '',
-        texthl = 'DiagnosticSignInfo',
-        linehl = 'InfoLine',
-      },
-      {
-        name = 'DiagnosticSignHint',
-        text = '',
-        texthl = 'DiagnosticSignHint',
-        linehl = 'HintLine',
-      },
-    }
   end,
 }

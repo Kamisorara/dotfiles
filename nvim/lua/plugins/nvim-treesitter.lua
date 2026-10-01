@@ -1,57 +1,54 @@
+-- nvim-treesitter 的 main 分支是完全重写版：
+--   - 解析器安装用 require('nvim-treesitter').install {}
+--   - 高亮启用用 Neovim 内置的 vim.treesitter.start()
+--   - ensure_installed / highlight / incremental_selection 等旧选项已删除
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    -- version = 'v0.9.3',
-    event = { 'BufReadPre', 'BufNewFile' },
+    branch = 'main',
+    lazy = false,
     build = ':TSUpdate',
-    dependencies = {
-      'windwp/nvim-ts-autotag',
-      'axelvc/template-string.nvim',
-    },
-    config = function()
-      require('nvim-treesitter.config').setup {
-        ensure_installed = {
-          'tsx',
-          'lua',
-          'vim',
-          'typescript',
-          'javascript',
-          'html',
-          'css',
-          'json',
-          'graphql',
-          'regex',
-          'prisma',
-          'markdown',
-          'markdown_inline',
-          'diff',
-          'vue',
-        },
-
-        sync_install = true,
-
-        auto_install = true,
-
-        highlight = {
-          enable = true,
-
-          additional_vim_regex_highlighting = false,
-        },
-        autotag = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<enter>',
-            node_incremental = '<enter>',
-            scope_incremental = false,
-            node_decremental = '<bs>',
-          },
-        },
-      }
-
-      require('template-string').setup {}
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        group = vim.api.nvim_create_augroup('UserTreesitter', {}),
+        callback = function(args)
+          -- 没有对应解析器的文件类型自动回退到正则高亮
+          pcall(vim.treesitter.start, args.buf)
+        end,
+      })
     end,
+    config = function()
+      require('nvim-treesitter').install {
+        'bash',
+        'css',
+        'diff',
+        'graphql',
+        'html',
+        'javascript',
+        'json',
+        'lua',
+        'markdown',
+        'markdown_inline',
+        'prisma',
+        'python',
+        'query',
+        'regex',
+        'tsx',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'vue',
+      }
+    end,
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {},
+  },
+  {
+    'axelvc/template-string.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    opts = {},
   },
 }
