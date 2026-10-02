@@ -6,8 +6,10 @@
 
 - **插件管理器**: lazy.nvim
 - **LSP 支持**: TypeScript/JavaScript (vtsls), Vue (vue_ls), Java (nvim-jdtls), Python, GraphQL, Lua, Prisma, CSS, HTML
-- **自动补全**: nvim-cmp（支持 LSP、代码片段、缓冲区和路径）
+- **自动补全**: blink.cmp（支持 LSP、代码片段、路径、缓冲区、cmdline）
 - **Git 集成**: Gitsigns, Neogit, Diffview, Telescope git pickers
+- **模糊查找**: Telescope
+- **配色方案**: Everforest
 
 ### 环境依赖
 
@@ -15,11 +17,12 @@
 - JDK 17+（仅 Java 项目）
 - [tree-sitter CLI](https://github.com/tree-sitter/tree-sitter-cli)（`main` 分支的 nvim-treesitter 用它编译解析器）：`npm install -g tree-sitter-cli` 或 `cargo install tree-sitter-cli` 或 `brew install tree-sitter`
 - C 编译器（编译解析器用）；Windows 上还需设置 `CC=gcc`（tree-sitter CLI 默认找 MSVC 的 cl.exe）
-- `rg`（ripgrep，Telescope live_grep 用）
+- `rg`（ripgrep）**必需**：`<leader>/` 全文搜索依赖它，缺失时报 `'ripgrep', or similar alternative, is a required dependency`；也是 `<leader>f` 文件搜索的兜底引擎。Windows: `scoop install ripgrep`（或 `winget install BurntSushi.ripgrep.MSVC`）
+- `fd` **推荐**：`<leader>f` 文件搜索的首选引擎（更快）；缺失时自动回退到 `rg --files`。Windows: `scoop install fd`（或 `winget install sharkdp.fd`）
+
+> Telescope 的两个搜索入口（`<leader>f` 按文件名、`<leader>/` 按文件内容）都需要上述工具真正在 PATH 里——装完后必须**重开终端和 Neovim**（进程启动时快照 PATH，旧会话看不到新装的工具）。
 
 LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无需预装系统 Python**：解释器自动使用项目根的 `.venv`（标准 venv / uv / poetry 均可，不激活也能正确分析），格式化用 ruff（独立二进制，零 Python 依赖）。
-- **模糊查找**: Telescope
-- **配色方案**: Everforest
 
 ---
 
@@ -113,8 +116,8 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 
 | 按键 | 功能 |
 |-----|------|
-| `<leader>f` | 查找文件 |
-| `<leader>t<C-f>` | 全局搜索 |
+| `<leader>f` | 查找文件（按文件名） |
+| `<leader>/` | 全局搜索（按文件内容，依赖 ripgrep） |
 | `<leader>te` | 浏览环境变量 |
 | `:Telescope buffers` | 列出打开的缓冲区 |
 | `:Telescope help_tags` | 搜索 Neovim 帮助 |
