@@ -17,12 +17,30 @@ return {
       },
       center = {
         {
-          icon = '  ',
+          icon = '󰱽 ',
+          desc = 'Find File',
+          action = 'Telescope find_files',
+          key = 'f',
+        },
+        {
+          icon = '󰊄 ',
+          desc = 'Find Word',
+          action = 'Telescope live_grep',
+          key = 'w',
+        },
+        {
+          icon = '󰄉 ',
+          desc = 'Recent Files',
+          action = 'Telescope oldfiles',
+          key = 'r',
+        },
+        {
+          icon = '  ',
           desc = 'Lazy Profile',
           action = 'Lazy profile',
         },
         {
-          icon = '  ',
+          icon = '  ',
           desc = 'Mason',
           action = 'Mason',
         },

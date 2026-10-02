@@ -48,14 +48,21 @@ opt.backup = false -- 禁用备份文件
 opt.writebackup = false -- 禁用写入备份文件
 opt.swapfile = false -- 禁用交换文件
 
+opt.undofile = true -- 持久化撤销历史，重启后仍可撤销（undotree 跨会话可用）
+
 opt.updatetime = 200 -- 设置较短的更新间隔时间（单位为毫秒）
 
-opt.timeoutlen = 500 -- 等待映射序列完成的时间（单位为毫秒）
+opt.timeoutlen = 300 -- 等待映射序列完成的时间（单位为毫秒），which-key 弹出更跟手
 
 opt.splitbelow = true -- 水平分割窗口时在下方打开新窗口
 opt.splitright = true -- 垂直分割窗口时在右侧打开新窗口
 
 opt.smoothscroll = true -- Neovim 原生平滑滚动（替代 neoscroll.nvim）
+
+-- Treesitter 折叠（0.10+ 原生；没有解析器的文件类型自动回退，不折叠）
+opt.foldmethod = 'expr'
+opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+opt.foldlevelstart = 99 -- 打开文件时默认全部展开
 
 opt.completeopt = 'menu,menuone,noinsert,noselect' -- 启用自动完成菜单，并禁止自动选择第一个选项
 opt.wildmenu = true -- 启用命令行的补全菜单
@@ -83,3 +90,11 @@ vim.filetype.add {
     vue = 'vue',
   },
 }
+
+-- 复制时短暂高亮复制区域
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('UserYankHighlight', {}),
+  callback = function()
+    vim.hl.on_yank()
+  end,
+})

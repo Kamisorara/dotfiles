@@ -44,7 +44,8 @@ local function clear()
     return
   end
   for _, name in ipairs(groups) do
-    local ok, hl = pcall(vim.api.nvim_get_hl, 0, { name = name, create = false })
+    local ok, hl =
+      pcall(vim.api.nvim_get_hl, 0, { name = name, create = false })
     if ok and type(hl) == 'table' and (hl.bg or hl.ctermbg) then
       hl.bg = nil
       hl.ctermbg = nil

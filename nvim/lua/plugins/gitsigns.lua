@@ -2,6 +2,8 @@ return {
   'lewis6991/gitsigns.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   opts = {
+    -- 超大文件（minified/生成代码）跳过 sign/blame，避免卡顿
+    max_file_length = 5000,
     signs = {
       add = { text = '▎' },
       change = { text = '▎' },

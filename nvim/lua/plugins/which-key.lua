@@ -17,8 +17,9 @@ return {
     wk.add {
       { '<leader>b', group = '+buffer' },
       { '<leader>c', group = '+comment' },
+      { '<leader>d', group = '+diagnostics' },
       { '<leader>g', group = '+git' },
-      { '<leader>h', group = '+hop' },
+      { '<leader>h', group = '+flash' },
       { '<leader>l', group = '+lsp' },
       { '<leader>t', group = '+telescope' },
       { '<leader>u', group = '+utils' },

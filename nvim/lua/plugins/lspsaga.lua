@@ -25,18 +25,36 @@ return {
 
         local opts = { buffer = ev.buf }
 
+        -- hover 用 K（比 <leader>lh 顺手得多）
+        vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
+
+        -- inlay hints：attach 即启用（vtsls/lua_ls 等支持，不支持的服务器无感）
+        vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+        vim.keymap.set('n', '<leader>ui', function()
+          vim.lsp.inlay_hint.enable(
+            not vim.lsp.inlay_hint.is_enabled { bufnr = ev.buf },
+            { bufnr = ev.buf }
+          )
+        end, { buffer = ev.buf, desc = 'toggle inlay hints' })
+
         -- vtsls: 整理/添加 imports（原 typescript-tools.nvim 的功能）
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if client and client.name == 'vtsls' then
           vim.keymap.set('n', '<leader>m', function()
             vim.lsp.buf.code_action {
-              context = { only = { 'source.organizeImports' }, diagnostics = {} },
+              context = {
+                only = { 'source.organizeImports' },
+                diagnostics = {},
+              },
               apply = true,
             }
           end, { buffer = ev.buf, desc = 'organize imports' })
           vim.keymap.set('n', '<leader>a', function()
             vim.lsp.buf.code_action {
-              context = { only = { 'source.addMissingImports.ts' }, diagnostics = {} },
+              context = {
+                only = { 'source.addMissingImports.ts' },
+                diagnostics = {},
+              },
               apply = true,
             }
           end, { buffer = ev.buf, desc = 'add missing imports' })

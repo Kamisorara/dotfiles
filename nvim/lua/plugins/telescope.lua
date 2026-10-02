@@ -1,6 +1,8 @@
 return {
   'nvim-telescope/telescope.nvim',
   -- version = '0.1.8',
+  -- dashboard 的 center 动作通过 :Telescope 命令触发，需要 cmd 懒加载入口
+  cmd = 'Telescope',
   dependencies = {
     'nvim-lua/plenary.nvim',
     {
@@ -16,7 +18,10 @@ return {
         end
         local ok = pcall(vim.fn.system, { 'make' })
         if not ok or vim.v.shell_error ~= 0 then
-          vim.notify('telescope-fzf-native 构建失败，使用默认排序器', vim.log.levels.WARN)
+          vim.notify(
+            'telescope-fzf-native 构建失败，使用默认排序器',
+            vim.log.levels.WARN
+          )
         end
       end,
     },
@@ -84,7 +89,7 @@ return {
       noremap = true,
     },
     {
-      '<leader>t<C-f>',
+      '<leader>/',
       ':Telescope live_grep<CR>',
       desc = 'live grep',
       silent = true,
@@ -104,11 +109,13 @@ return {
         end
         table.sort(entries)
 
-        pickers.new({}, {
-          prompt_title = 'Environment Variables',
-          sorter = conf.generic_sorter {},
-          finder = finders.new_table { results = entries },
-        }):find()
+        pickers
+          .new({}, {
+            prompt_title = 'Environment Variables',
+            sorter = conf.generic_sorter {},
+            finder = finders.new_table { results = entries },
+          })
+          :find()
       end,
       desc = 'environment variables',
     },

@@ -20,7 +20,6 @@ return {
   end,
   keys = function()
     local vvar = vim.api.nvim_get_vvar
-    local api = require 'Comment.api'
 
     local toggle_current_line = function()
       if vvar 'count' == 0 then
@@ -75,17 +74,23 @@ return {
       },
       {
         '<leader>co',
-        api.insert.linewise.below,
+        function()
+          require('Comment.api').insert.linewise.below()
+        end,
         desc = 'comment insert below',
       },
       {
         '<leader>cO',
-        api.insert.linewise.above,
+        function()
+          require('Comment.api').insert.linewise.above()
+        end,
         desc = 'comment insert above',
       },
       {
         '<leader>cA',
-        api.locked 'insert.linewise.eol',
+        function()
+          require('Comment.api').locked 'insert.linewise.eol'
+        end,
         desc = 'comment insert end of line',
       },
     }

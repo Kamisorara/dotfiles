@@ -1,6 +1,9 @@
 return {
   -- 仓库已从 williamboman/* 迁移到 mason-org/*（旧地址靠 GitHub 重定向）
   'mason-org/mason.nvim',
+  -- 推迟到首个文件打开前加载：早于 FileType / LSP 启动，
+  -- mason 的 PATH 注入仍然先于 server 查找；dashboard 空启动不再付 mason 成本
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'mason-org/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -28,6 +31,7 @@ return {
       'lua_ls',
       'prismals',
       'pyright',
+      'ruff', -- Python lint（类型检查由 pyright 负责）
       'vtsls', -- TypeScript with Vue support
       'vue_ls', -- Vue language server
     }

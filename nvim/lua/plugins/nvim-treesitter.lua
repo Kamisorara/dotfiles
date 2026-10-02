@@ -40,6 +40,7 @@ return {
         'vim',
         'vimdoc',
         'vue',
+        'yaml',
       }
     end,
   },

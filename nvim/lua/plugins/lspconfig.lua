@@ -1,11 +1,14 @@
 return {
   'neovim/nvim-lspconfig',
+  -- 与 mason 同样推迟到 BufReadPre：vim.lsp.enable 的 FileType
+  -- 处理器仍能赶上首个 buffer 的高亮/attach
+  event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp', -- LSP 补全 capabilities
+    'saghen/blink.cmp', -- LSP 补全 capabilities（在服务器启动前加载）
   },
   config = function()
-    -- Enhance capabilities with nvim-cmp (completion plugin)
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    -- blink.cmp 的补全 capabilities
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
 
     -- Configure LSP servers using Neovim 0.11+ API
 
@@ -30,6 +33,10 @@ return {
               vim.fn.stdpath 'data' .. '/lazy/lazy.nvim/lua',
             },
             checkThirdParty = false,
+          },
+          -- inlay hints（参数类型等），<leader>ui 切换（lspsaga.lua）
+          hint = {
+            enable = true,
           },
           telemetry = {
             enable = false,
@@ -92,9 +99,10 @@ return {
           for _, suffix in ipairs(suffixes) do
             local python = venv .. suffix
             if vim.fn.executable(python) == 1 then
-              config.settings = vim.tbl_deep_extend('force', config.settings or {}, {
-                python = { pythonPath = python },
-              })
+              config.settings =
+                vim.tbl_deep_extend('force', config.settings or {}, {
+                  python = { pythonPath = python },
+                })
               return
             end
           end
@@ -104,6 +112,12 @@ return {
 
     -- html
     vim.lsp.config('html', {
+      capabilities = capabilities,
+    })
+
+    -- python: ruff 负责 lint 诊断与快速修复，pyright 负责类型检查
+    -- （与 conform 里的 ruff 格式化共用同一个 mason 安装的二进制）
+    vim.lsp.config('ruff', {
       capabilities = capabilities,
     })
 
@@ -129,7 +143,13 @@ return {
           },
         },
       },
-      filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+      filetypes = {
+        'typescript',
+        'javascript',
+        'javascriptreact',
+        'typescriptreact',
+        'vue',
+      },
       capabilities = capabilities,
     })
 
@@ -150,6 +170,7 @@ return {
       'prismals',
       'cssls',
       'pyright',
+      'ruff',
       'html',
       'vtsls',
       'vue_ls',

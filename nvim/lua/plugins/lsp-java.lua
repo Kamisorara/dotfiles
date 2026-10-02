@@ -4,12 +4,15 @@ return {
   'mfussenegger/nvim-jdtls',
   ft = { 'java' },
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp', -- 补全 capabilities
+    'saghen/blink.cmp', -- 补全 capabilities（jdtls 不走 vim.lsp.enable，需手动传入）
   },
   config = function()
     -- Java LSP 需要 JDK 17+，缺失时友好提示而不是报错
     if vim.fn.executable 'java' == 0 then
-      vim.notify('jdtls: 未找到 java（需要 JDK 17+），Java LSP 未启动', vim.log.levels.WARN)
+      vim.notify(
+        'jdtls: 未找到 java（需要 JDK 17+），Java LSP 未启动',
+        vim.log.levels.WARN
+      )
       return
     end
 
@@ -32,8 +35,9 @@ return {
       return
     end
 
-    local workspace_dir =
-      vim.fn.stdpath 'data' .. '/jdtls-workspaces/' .. vim.fs.basename(root_dir)
+    local workspace_dir = vim.fn.stdpath 'data'
+      .. '/jdtls-workspaces/'
+      .. vim.fs.basename(root_dir)
 
     -- 找 jdtls 可执行文件：Windows 上 mason 生成 .cmd 包装脚本，
     -- libuv 无法直接 spawn，必须经 cmd.exe 调用；Unix 上直接用 PATH 里的 jdtls
@@ -58,7 +62,7 @@ return {
     local config = {
       cmd = build_cmd(),
       root_dir = root_dir,
-      capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      capabilities = require('blink.cmp').get_lsp_capabilities(),
       settings = {
         java = {
           -- 需要指定 JDK 运行时时取消注释：
