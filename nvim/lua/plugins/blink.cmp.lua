@@ -10,6 +10,8 @@ return {
   dependencies = {
     -- LuaSnip 钉 v2（官方建议，main 分支未验证）
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    -- gitcommit 补全源（# issue/PR、: 历史 commit、@ 用户）
+    'Kaiser-Yang/blink-cmp-git',
   },
   opts = {
     appearance = {
@@ -25,7 +27,18 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'lsp', 'path', 'snippets', 'buffer', 'git' },
+      providers = {
+        -- commit message 补全：只在 gitcommit（neogit 的 commit buffer
+        -- 也是这个 filetype）和 octo 里生效，其他 buffer 由 enabled 关掉
+        git = {
+          name = 'Git',
+          module = 'blink-cmp-git',
+          enabled = function()
+            return vim.tbl_contains({ 'gitcommit', 'octo' }, vim.bo.filetype)
+          end,
+        },
+      },
     },
     completion = {
       documentation = {

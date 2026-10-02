@@ -21,7 +21,7 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 - Adding an LSP server: add to `ensure_installed` in `lua/plugins/mason.lua` and configure with `vim.lsp.config(...)` + `vim.lsp.enable {...}` in `lua/plugins/lspconfig.lua` (0.11+ API).
 - Adding a formatter: add to mason `ensure_installed` plus `formatters_by_ft` in `lua/plugins/conform.lua` (format-on-save is the only formatting entry point).
 - Linting: `lua/plugins/lint.lua` wires nvim-lint + eslint_d for js/ts/jsx/tsx/vue; it only runs when the project has an eslint config (flat or legacy). Python formatting is ruff (conform); Python linting is the ruff LSP server (pyright stays for type checking).
-- Leader key is `<Space>` in Neovim; tmux prefix is `C-f` (default `C-b` is unbound). Git keymaps live under `<leader>g` (gitsigns in `gitsigns.lua`, diffview + telescope git pickers in their own specs).
+- Leader key is `<Space>` in Neovim; tmux prefix is `C-f` (default `C-b` is unbound). Git keymaps live under `<leader>g` (gitsigns in `gitsigns.lua`, diffview + telescope git pickers in their own specs, permalink yank/open in `gitlinker.lua`). Merge-conflict resolution (`co`/`ct`/`cb`/`c0`) is `git-conflict.lua`.
 
 ## Gotchas
 
