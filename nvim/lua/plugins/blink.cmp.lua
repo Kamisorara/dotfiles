@@ -86,14 +86,26 @@ return {
       window = { border = 'rounded' },
     },
     cmdline = {
-      keymap = { preset = 'inherit' },
+      -- 输入时不弹补全；Up/Down（或 Tab）主动呼出并选择，选择时只高亮
+      -- 不改写已输入内容；Enter 执行当前输入，菜单开着时执行选中项。
+      -- C-n/C-p 未绑定，保留原生的命令/搜索历史
+      keymap = {
+        preset = 'none',
+        ['<Up>'] = { 'show', 'select_prev', 'fallback' },
+        ['<Down>'] = { 'show', 'select_next', 'fallback' },
+        ['<Tab>'] = { 'show', 'select_next', 'fallback' },
+        ['<S-Tab>'] = { 'show', 'select_prev', 'fallback' },
+        ['<CR>'] = { 'accept_and_enter', 'fallback' },
+        ['<C-e>'] = { 'hide', 'fallback' },
+        ['<Esc>'] = { 'hide', 'fallback' },
+      },
       completion = {
-        menu = {
-          -- 只在命令行(:)和搜索(/)时自动弹出，输入模式保持原生
-          auto_show = function()
-            local t = vim.fn.getcmdtype()
-            return t == ':' or t == '/'
-          end,
+        menu = { auto_show = false },
+        list = {
+          selection = {
+            preselect = false, -- 不预选第一项
+            auto_insert = false, -- 导航时只高亮，不改写输入
+          },
         },
       },
     },
