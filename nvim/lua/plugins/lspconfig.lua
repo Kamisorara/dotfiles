@@ -37,6 +37,8 @@ return {
           -- inlay hints（参数类型等），<leader>ui 切换（lspsaga.lua）
           hint = {
             enable = true,
+            -- 混合表（数组+命名键）的元素前会标 [1]/[2]，lazy spec 里全是噪音
+            arrayIndex = 'Disable',
           },
           telemetry = {
             enable = false,
