@@ -62,7 +62,8 @@ return {
     },
     pickers = {
       find_files = {
-        winblend = 20,
+        -- 透明背景下浮窗必须实底（配合 config 里的高亮设置），winblend 会整体压透明度
+        winblend = 0,
         previewer = false, -- 禁用预览提高速度
       },
     },
@@ -79,6 +80,35 @@ return {
     local telescope = require 'telescope'
     telescope.setup(opts)
     pcall(telescope.load_extension, 'fzf')
+
+    -- 背景透明（transparent.lua）会把 Normal 清成无底色，Telescope 浮窗
+    -- 因此融进终端背景看不清：给浮窗高亮组设实底色。
+    -- 锚点用 NormalFloat/Pmenu——都不在透明清单里，保留配色的实色
+    local solid = vim.api.nvim_get_hl(0, { name = 'NormalFloat' }).bg
+      or vim.api.nvim_get_hl(0, { name = 'Pmenu' }).bg
+      or '#2f3831'
+    local fg = vim.api.nvim_get_hl(0, { name = 'Normal' }).fg
+    for _, group in ipairs {
+      'TelescopeNormal',
+      'TelescopePromptNormal',
+      'TelescopeResultsNormal',
+      'TelescopePreviewNormal',
+      'TelescopeBorder',
+      'TelescopePromptBorder',
+      'TelescopeResultsBorder',
+      'TelescopePreviewBorder',
+    } do
+      local ok, hl =
+        pcall(vim.api.nvim_get_hl, 0, { name = group, create = false })
+      hl = ok and hl or {}
+      -- link 组不能与 fg/bg 混设；default=true 会让设置退让于已有显式定义，
+      -- 二者都必须显式清除
+      hl.link = nil
+      hl.default = nil
+      hl.bg = solid
+      hl.fg = hl.fg or fg
+      pcall(vim.api.nvim_set_hl, 0, group, hl)
+    end
   end,
   keys = {
     {
