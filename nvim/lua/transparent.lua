@@ -33,6 +33,10 @@ local groups = {
   -- 文件树（原 extra_groups）
   'NvimTreeNormal',
   'NvimTreeNormalNC',
+  -- everforest 给这个组显式设了 bg_dim；tree 的 winhl 把空白区
+  -- 映射到它（EndOfBuffer:NvimTreeEndOfBuffer），漏清会导致
+  -- 文件列表透明、下方空白区不透明
+  'NvimTreeEndOfBuffer',
 }
 
 local function clear()
