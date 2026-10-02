@@ -2,6 +2,12 @@ local g = vim.g -- 使用简写来访问全局 Vim 变量
 local opt = vim.opt -- 使用简写来访问 Vim 选项
 
 g.encoding = 'UTF-8' -- 设置全局编码为 UTF-8
+
+-- 禁用未使用的内置 provider（本配置无任何插件依赖 node/python/perl/ruby）
+g.loaded_node_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
 opt.fileencoding = 'utf-8' -- 设置文件编码为 UTF-8
 
 -- local win_height = vim.fn.winheight(0) -- 获取当前窗口的高度（此行被注释掉了）
