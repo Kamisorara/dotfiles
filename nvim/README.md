@@ -10,6 +10,7 @@
 - **Git 集成**: lazygit（`<leader>gg` 浮动操作台）+ Gitsigns, Diffview, Telescope git pickers
 - **模糊查找**: Telescope
 - **配色方案**: Everforest
+- **代码可读性**: 彩虹括号 (rainbow-delimiters，按嵌套层级循环配色) + 细缩进参考线 (indent-blankline，默认灰色)
 
 ### 环境依赖
 
@@ -244,7 +245,8 @@ nvim/
 │       ├── git-conflict.lua # 合并冲突取舍
 │       ├── gitlinker.lua # 永久链接复制/打开
 │       ├── gitsigns.lua
-│       ├── indent-blankline.lua # 缩进参考线
+│       ├── indent-blankline.lua # 细缩进参考线（默认灰色）
+
 │       ├── lint.lua      # eslint_d (nvim-lint)
 │       ├── lsp-java.lua    # Java LSP (nvim-jdtls)
 │       ├── lspconfig.lua # vtsls + vue_ls 等 LSP
@@ -257,6 +259,7 @@ nvim/
 │       ├── nvim-cursorline.lua
 │       ├── nvim-tree.lua
 │       ├── nvim-treesitter.lua
+│       ├── rainbow-delimiters.lua # 彩虹括号
 │       ├── surround.lua
 │       ├── telescope.lua
 │       ├── todo-comments.lua
