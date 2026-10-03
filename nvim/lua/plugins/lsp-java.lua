@@ -16,16 +16,59 @@ return {
       return
     end
 
-    local root_dir = vim.fs.root(0, {
-      'build.gradle',
-      'build.gradle.kts',
-      'settings.gradle',
-      'settings.gradle.kts',
-      'pom.xml',
-      'mvnw',
-      'gradlew',
-      '.git',
-    })
+    -- 根目录决定导入范围，多模块工程必须取最外层根，层级不限：
+    --   - Gradle: settings.gradle(.kts) 定义多模块根，一路向上探到最顶层
+    --     （复合构建 composite build 的内嵌 build 也有 settings.gradle，
+    --     取最外层才能连同 included build 一起导入）
+    --   - Maven:  先找最近的 pom.xml（可能是子模块），再沿「连续 pom 链」
+    --     逐层上溯到 reactor 根，层数不限；文件常在 src/main/java 深处，
+    --     不能从文件目录直接开始判 pom。只导入某个子模块会导致兄弟模块
+    --     全部 unresolved
+    --   - 其余:   按原标记就近找
+    local function find_root()
+      local dir = vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+      local top_settings = nil
+      while dir and dir ~= '' do
+        if
+          vim.fn.filereadable(dir .. '/settings.gradle') == 1
+          or vim.fn.filereadable(dir .. '/settings.gradle.kts') == 1
+        then
+          top_settings = dir
+        end
+        local parent = vim.fs.dirname(dir)
+        if not parent or parent == dir then
+          break
+        end
+        dir = parent
+      end
+      if top_settings then
+        return top_settings
+      end
+      local nearest_pom = vim.fs.root(0, { 'pom.xml' })
+      if nearest_pom then
+        local dir = nearest_pom
+        while dir do
+          local parent = vim.fs.dirname(dir)
+          if not parent or parent == dir then
+            break
+          end
+          if vim.fn.filereadable(parent .. '/pom.xml') == 0 then
+            break
+          end
+          dir = parent
+        end
+        return dir
+      end
+      return vim.fs.root(0, {
+        'build.gradle',
+        'build.gradle.kts',
+        'mvnw',
+        'gradlew',
+        '.git',
+      })
+    end
+
+    local root_dir = find_root()
 
     if not root_dir then
       vim.notify(
