@@ -28,6 +28,9 @@ return {
         -- hover 用 K（比 <leader>lh 顺手得多）
         vim.keymap.set('n', 'K', '<cmd>Lspsaga hover_doc<cr>', opts)
 
+        -- gd 跳转定义：Neovim 通用肌肉记忆键，与 <leader>ld 等价
+        vim.keymap.set('n', 'gd', '<cmd>Lspsaga goto_definition<cr>', opts)
+
         -- inlay hints：attach 即启用（vtsls/lua_ls 等支持，不支持的服务器无感）
         vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
         vim.keymap.set('n', '<leader>ui', function()
