@@ -28,6 +28,10 @@ return {
   },
   opts = {
     defaults = {
+      -- winblend 必须 0：>0 会把 nvim 内部（后面的代码）透出来。
+      -- 浮窗不设底色时（见 config），picker 区域被无底色空白格覆盖：
+      -- 后面的代码被盖掉，透出的是终端自身背景（WT acrylic 磨砂）
+      winblend = 0,
       vimgrep_arguments = {
         'rg',
         '--color=never',
@@ -62,8 +66,6 @@ return {
     },
     pickers = {
       find_files = {
-        -- 透明背景下浮窗必须实底（配合 config 里的高亮设置），winblend 会整体压透明度
-        winblend = 0,
         previewer = false, -- 禁用预览提高速度
       },
     },
@@ -81,33 +83,20 @@ return {
     telescope.setup(opts)
     pcall(telescope.load_extension, 'fzf')
 
-    -- 背景透明（transparent.lua）会把 Normal 清成无底色，Telescope 浮窗
-    -- 因此融进终端背景看不清：给浮窗高亮组设实底色。
-    -- 锚点用 NormalFloat/Pmenu——都不在透明清单里，保留配色的实色
-    local solid = vim.api.nvim_get_hl(0, { name = 'NormalFloat' }).bg
-      or vim.api.nvim_get_hl(0, { name = 'Pmenu' }).bg
-      or '#2f3831'
-    local fg = vim.api.nvim_get_hl(0, { name = 'Normal' }).fg
+    -- 毛玻璃方案：浮窗完全不留自己的底色（transparent.lua 已把 Normal
+    -- 清空，Telescope* 组链到它），picker 区域由无底色空白格覆盖——
+    -- 后面的代码被盖住，透出终端自身背景（Windows Terminal 的 acrylic
+    -- 磨砂即在此生效）。只显式保留边框前景色，保证浮窗轮廓可见
+    local fg = vim.api.nvim_get_hl(0, { name = 'WinBorder', create = false }).fg
+      or vim.api.nvim_get_hl(0, { name = 'Comment' }).fg
+      or '#859289'
     for _, group in ipairs {
-      'TelescopeNormal',
-      'TelescopePromptNormal',
-      'TelescopeResultsNormal',
-      'TelescopePreviewNormal',
       'TelescopeBorder',
       'TelescopePromptBorder',
       'TelescopeResultsBorder',
       'TelescopePreviewBorder',
     } do
-      local ok, hl =
-        pcall(vim.api.nvim_get_hl, 0, { name = group, create = false })
-      hl = ok and hl or {}
-      -- link 组不能与 fg/bg 混设；default=true 会让设置退让于已有显式定义，
-      -- 二者都必须显式清除
-      hl.link = nil
-      hl.default = nil
-      hl.bg = solid
-      hl.fg = hl.fg or fg
-      pcall(vim.api.nvim_set_hl, 0, group, hl)
+      vim.api.nvim_set_hl(0, group, { fg = fg })
     end
   end,
   keys = {
