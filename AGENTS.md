@@ -12,6 +12,7 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
   - `snippets/` — VS Code-style JSON snippets loaded via LuaSnip.
   - `stylua.toml` — repo Lua style: 80-col width, 2-space indent, prefer single quotes, no call parentheses.
 - `tmux/` — `tmux.conf` sources `statusline.conf`, `utility.conf`, and (on macOS only) `macos.conf`.
+- Windows pwsh 7 prompt is oh-my-posh (installed via scoop). The profile lives at `Documents\PowerShell\Microsoft.PowerShell_profile.ps1`, NOT in this repo; install/config reference is the「PowerShell 7 提示符（Windows）」section in `README.md`.
 - Deployed via symlinks: Unix uses `~/.config/nvim -> dotfiles/nvim` and `~/.config/tmux -> dotfiles/tmux`; this Windows machine uses a junction `%LOCALAPPDATA%\nvim -> dotfiles/nvim`. Full per-OS setup instructions live in `README.md`. Configs target Unix paths even though this repo may be edited on Windows.
 
 ## Conventions
@@ -39,8 +40,10 @@ Personal dotfiles: zsh (Zim plugin manager), Neovim (lazy.nvim), and tmux config
 - Completion is **blink.cmp** (nvim-cmp and all cmp-* sources/lspkind were removed on purpose — don't re-add). LuaSnip stays as the snippet engine (pinned `v2.*`). blink is declared a dependency of nvim-lspconfig and lsp-java so `get_lsp_capabilities()` is available before servers start. hop.nvim and vim-surround were replaced by flash.nvim (`<leader>hp`/`<leader>hs`) and nvim-surround (same ys/cs/ds); trouble.nvim lives under `<leader>d`.
 - `nvim/CLAUDE.md` (gitignored, local-only) is outdated — trust the code and git log over it.
 - `*.lua.bak` files (e.g. `tailwind-tools.lua.bak`) are disabled configs kept intentionally; don't delete or "restore" them.
+- GitHub over HTTPS is unreachable directly on this machine (winget downloads fail with `0x80072efd`); git uses SSH so it is unaffected. For HTTP downloads (scoop/winget/curl/npm), go through the local proxy `http://127.0.0.1:7897` (Clash mixed port — only works while the proxy app is running), e.g. `scoop config proxy 127.0.0.1:7897` … `scoop config rm proxy`.
 
 ## Docs to read before editing
 
 - `nvim/README.md` — full keymap and plugin reference (Chinese).
 - `tmux/README.md` — tmux key bindings and file roles.
+- `README.md` — per-OS deployment plus the Windows PowerShell 7 / oh-my-posh setup (Chinese).
