@@ -86,9 +86,16 @@ opt.showmode = false -- 隐藏模式提示
 
 opt.nrformats = 'bin,hex,alpha' -- 设置数字格式，支持二进制、十六进制和字母表示法
 
-vim.cmd [[
-    autocmd TermOpen * setlocal nonumber norelativenumber -- 在终端模式中禁用行号和相对行号
-]]
+-- 在终端模式中禁用行号和相对行号
+-- （原写法把 Lua 风格的 `-- 注释` 放进了 vim.cmd 块，VimL 里会被当成
+-- 选项名解析，TermOpen 抛 E518 并中断 jobstart——lazygit 首次触发此路径）
+vim.api.nvim_create_autocmd('TermOpen', {
+  group = vim.api.nvim_create_augroup('UserTermOpen', { clear = true }),
+  callback = function()
+    vim.wo.number = false
+    vim.wo.relativenumber = false
+  end,
+})
 
 -- 文件类型检测
 vim.filetype.add {
