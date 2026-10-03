@@ -7,7 +7,7 @@
 - **插件管理器**: lazy.nvim
 - **LSP 支持**: TypeScript/JavaScript (vtsls), Vue (vue_ls), Java (nvim-jdtls), Python, GraphQL, Lua, Prisma, CSS, HTML
 - **自动补全**: blink.cmp（支持 LSP、代码片段、路径、缓冲区、cmdline）
-- **Git 集成**: Gitsigns, Neogit, Diffview, Telescope git pickers
+- **Git 集成**: lazygit（`<leader>gg` 浮动操作台）+ Gitsigns, Diffview, Telescope git pickers
 - **模糊查找**: Telescope
 - **配色方案**: Everforest
 
@@ -81,7 +81,7 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 | `<leader>gd` | 当前文件与暂存区对比 |
 | `<leader>gD` | 当前文件与 HEAD 对比 |
 | `ih` | hunk 文本对象（`dih`/`yih`/`cih`） |
-| `<leader>gt` | 打开 Neogit |
+| `<leader>gg` | 打开 lazygit（浮动终端，需要 PATH 里有 lazygit） |
 | `<leader>go` / `<leader>gq` | Diffview 打开/关闭（审阅全部改动） |
 | `<leader>gh` / `<leader>gH` | 当前文件/整个仓库的提交历史 (Diffview) |
 | `<leader>gc` | 搜索所有提交 (Telescope) |
@@ -217,7 +217,6 @@ LSP 服务器与格式化工具全部由 Mason 自动安装。Python 开发**无
 | `:NvimTreeToggle` | 切换文件浏览器（快捷键: `<leader>e`） |
 | `:TodoTelescope` | 搜索 TODO 注释（快捷键: `<leader>tt`） |
 | `:Noice` | Noice 命令日志 |
-| `:Neogit` | 打开 Git 界面（快捷键: `<leader>gt`） |
 
 ---
 
@@ -233,6 +232,7 @@ nvim/
 │   ├── transparent.lua   # 原生背景透明（:TransparentToggle）
 │   └── plugins/          # 插件配置（一个插件一个文件）
 │       ├── auto-save.lua
+│       ├── blink.cmp.lua # 补全（替代 nvim-cmp）
 │       ├── bufferline.lua
 │       ├── colorizer.lua
 │       ├── colorscheme.lua
@@ -240,23 +240,27 @@ nvim/
 │       ├── conform.lua   # 保存时格式化（唯一的格式化入口）
 │       ├── dashboard.lua
 │       ├── diffview.lua  # git diff / 历史
+│       ├── flash.lua     # 跳转（替代 hop）
+│       ├── git-conflict.lua # 合并冲突取舍
+│       ├── gitlinker.lua # 永久链接复制/打开
 │       ├── gitsigns.lua
-│       ├── hop.lua
+│       ├── indent-blankline.lua # 缩进参考线
+│       ├── lint.lua      # eslint_d (nvim-lint)
 │       ├── lsp-java.lua    # Java LSP (nvim-jdtls)
 │       ├── lspconfig.lua # vtsls + vue_ls 等 LSP
 │       ├── lspsaga.lua
+│       ├── lazygit.nvim.lua # lazygit 浮动操作台（<leader>gg）
 │       ├── lualine.lua
 │       ├── mason.lua
-│       ├── neogit.lua
 │       ├── noice.lua
 │       ├── nvim-autopair.lua
-│       ├── nvim-cmp.lua
 │       ├── nvim-cursorline.lua
 │       ├── nvim-tree.lua
 │       ├── nvim-treesitter.lua
 │       ├── surround.lua
 │       ├── telescope.lua
 │       ├── todo-comments.lua
+│       ├── trouble.lua
 │       ├── undotree.lua
 │       └── which-key.lua
 ├── snippets/             # VS Code 格式代码片段
